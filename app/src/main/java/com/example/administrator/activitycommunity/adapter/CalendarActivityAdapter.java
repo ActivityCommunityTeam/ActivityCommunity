@@ -49,8 +49,8 @@ public class CalendarActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
         Picasso.with(mContext).load(_activity.getImage_url()).into(viewholder.activityPicImg);
         viewholder.activityTitleTv.setText(_activity.getActivity_title());
         viewholder.activityBegaintimeTv.setText("开始时间："+_activity.getBegin_time());
-        viewholder.activityEndtimeTv.setText("结束时间："+_activity.getEnd_time());
-        viewholder.activitySumPriceTv.setText("总金额："+(_activity.getAttended()*_activity.getPrice()));
+        viewholder.activityEndtimeTv.setText("结束时间:"+_activity.getEnd_time());
+        viewholder.activitySumPriceTv.setText("总金额:"+(_activity.getAttended()*_activity.getPrice()));
         viewholder.activityAttendedTv.setText("已报名"+_activity.getAttended());
         viewholder.activityAddressTv.setText("地址："+_activity.getSite());
         viewholder.activityApplyTv.setOnClickListener(new View.OnClickListener() {

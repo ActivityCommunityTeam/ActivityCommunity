@@ -43,7 +43,7 @@ import rx.subscriptions.CompositeSubscription;
 import static com.example.administrator.activitycommunity.net.NetWork.getApiService;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private static final int TIMETOCOUNT = 3;
+    private static final int TIMETOCOUNT = 0;
     private static Unbinder mUnbinder;
     @BindView(R.id.startPage_img)
     ImageView startPageImg;

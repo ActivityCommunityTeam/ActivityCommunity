@@ -48,9 +48,9 @@ public class MY_FragmentAttentionAdapter extends RecyclerView.Adapter<RecyclerVi
         PersonalActivitys personalActivitys = mDatas.get(position);
         Picasso.with(mContext).load(personalActivitys.getImage_url()).into(myViewHoder.activityPicImg);
         myViewHoder.activityTitleTv.setText(personalActivitys.getActivity_title());
-        myViewHoder.activityBegaintimeTv.setText("开始时间：" + personalActivitys.getBegin_time());
-        myViewHoder.activityEndtimeTv.setText("结束时间："+personalActivitys.getEnd_time());
-        myViewHoder.activityMoneyTv.setText("金额：" + personalActivitys.getPay_amount());
+        myViewHoder.activityBegaintimeTv.setText("开始时间:" + personalActivitys.getBegin_time());
+        myViewHoder.activityEndtimeTv.setText("结束时间:"+personalActivitys.getEnd_time());
+        myViewHoder.activityMoneyTv.setText("金额:" + personalActivitys.getPay_amount());
 
     }
 

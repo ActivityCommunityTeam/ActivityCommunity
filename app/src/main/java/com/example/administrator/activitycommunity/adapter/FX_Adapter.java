@@ -43,13 +43,13 @@ public class FX_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         MyViewHoder myViewHoder = (MyViewHoder) holder;
         String _imgUrl = mDatas.get(position).getImage_url();
         Picasso.with(mContext).load(_imgUrl).into(myViewHoder.activity_pic_img);
-        myViewHoder.activity_address_tv.setText("地点："+mDatas.get(position).getSite());
-        myViewHoder.activity_attended_tv.setText("已报名："+mDatas.get(position).getAttended());
+        myViewHoder.activity_address_tv.setText("地点:"+mDatas.get(position).getSite());
+        myViewHoder.activity_attended_tv.setText("已报名:"+mDatas.get(position).getAttended());
 //        myViewHoder.activity_compair_tv.setText(mDatas.get(position).getSite());
         myViewHoder.activity_price_tv.setText("￥"+mDatas.get(position).getPrice());
         int _sumPrice =mDatas.get(position).getPrice()*mDatas.get(position).getAttended();
 //        myViewHoder.activity_sumPrice_tv.setText("总金额："+_sumPrice);
-        myViewHoder.activity_time_tv.setText("时间："+mDatas.get(position).getBegin_time());
+        myViewHoder.activity_time_tv.setText("时间:"+mDatas.get(position).getBegin_time());
         myViewHoder.activity_title_tv.setText(mDatas.get(position).getActivity_title());
         myViewHoder.activity_price_tv.setOnClickListener(new View.OnClickListener() {
             @Override
