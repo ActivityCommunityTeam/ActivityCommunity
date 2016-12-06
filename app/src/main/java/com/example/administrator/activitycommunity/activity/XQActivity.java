@@ -14,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.activitycommunity.R;
+import com.example.administrator.activitycommunity.fragment.ApplyDialogFragment;
 import com.example.administrator.activitycommunity.model.ActivityDetail;
+import com.example.administrator.activitycommunity.model.AttentionStatus;
 import com.example.administrator.activitycommunity.model.Payment;
 import com.example.administrator.activitycommunity.model.SaveOrUpdateAtten;
 import com.example.administrator.activitycommunity.model.SaveOrder;
@@ -69,7 +71,9 @@ public class XQActivity extends AppCompatActivity {
     private CompositeSubscription compositeSubscription;
     private int mMax_num_people = -1;
     private Realm realm;
+    private User mUser;
     private static String STATUS = "";
+    private static int CODE = -1;
     private static String LZBZ = "";
     private static String URL="http://211.149.235.17:8080/hdsq/app/getDetailContent/";
 
@@ -80,9 +84,42 @@ public class XQActivity extends AppCompatActivity {
         mUnbinder = ButterKnife.bind(this);
         compositeSubscription = new CompositeSubscription();
         realm = Realm.getDefaultInstance();
-        initView();
+        realm.beginTransaction();
+        mUser = realm.where(User.class).findFirst();
+        realm.commitTransaction();
         initData();
+        initView();
 
+
+    }
+
+    private void getAttentionStatus(int activityId) {
+        NetWork.getApiService().getAttentionStatus(mUser.getUser_id(),activityId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<AttentionStatus>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(AttentionStatus attentionStatus) {
+                        if (attentionStatus.getStatus().equals("01")){
+                            xqAtttionBtn.setText("已关注");
+                            STATUS = "02";
+                        }else {
+                            xqAtttionBtn.setText("关注");
+                            STATUS = "01";
+                        }
+
+                    }
+                });
 
     }
 
@@ -132,6 +169,7 @@ public class XQActivity extends AppCompatActivity {
                         public void onNext(ActivityDetail activityDetail) {
                             Log.i("Daniel", "XQActivity---onError---成功获取详情！---");
                             mActivityDetail = activityDetail;
+                            getAttentionStatus(activityDetail.getActivity_id());
                             setData();
                         }
                     });
@@ -174,7 +212,7 @@ public class XQActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.xq_apply_btn:
-                show_Dialog();
+                show_Dialog(mActivityDetail);
 
                 break;
             case R.id.xq_atttion_btn:
@@ -185,7 +223,9 @@ public class XQActivity extends AppCompatActivity {
         }
     }
 
-    private void show_Dialog() {
+    private void show_Dialog(ActivityDetail activityDetail) {
+        ApplyDialogFragment applyDialogFragment = new ApplyDialogFragment(activityDetail);
+        applyDialogFragment.show(getFragmentManager(),"applyDialogFragment");
 //        View view = LayoutInflater.from(this).inflate(R.layout.zhifu, null);
 //        // 设置style 控制默认dialog带来的边距问题
 //        final Dialog dialog = new Dialog(this, R.style.common_dialog);
@@ -264,18 +304,8 @@ public class XQActivity extends AppCompatActivity {
     }
 
     private void getAttentionNetWork() {
-        realm.beginTransaction();
-        User _query = realm.where(User.class).findFirst();
-        realm.commitTransaction();
-        String _attendtion = xqAtttionBtn.getText().toString();
-        if (_attendtion.equals("关注")) {
-            STATUS = "01";
-        } else {
-            STATUS = "02";
-        }
-        Log.i("Daniel", "XQActivity---getNetWork---query.getUser_id()---" + _query.getUser_id());
-        Log.i("Daniel", "XQActivity---getNetWork---mActivityDetail.getActivity_id()---" + mActivityDetail.getActivity_id());
-        NetWork.getApiService().SaveOrUpdateAtten(_query.getUser_id(), mActivityDetail.getActivity_id(), STATUS)
+
+        NetWork.getApiService().SaveOrUpdateAtten(mUser.getUser_id(), mActivityDetail.getActivity_id(), STATUS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SaveOrUpdateAtten>() {
@@ -293,12 +323,15 @@ public class XQActivity extends AppCompatActivity {
                     public void onNext(SaveOrUpdateAtten saveOrUpdateAtten) {
                         Log.i("Daniel", "XQActivity---onNext---saveOrUpdateAtten.getCode()---" + saveOrUpdateAtten.getCode());
                         Log.i("Daniel", "XQActivity---onNext---STATUS---" + STATUS);
-                        if (saveOrUpdateAtten.getCode() == 1 && STATUS.equals("01")) {
+                        CODE=saveOrUpdateAtten.getCode();
+                        if (CODE == 1 && STATUS.equals("01")) {
                             Toast.makeText(XQActivity.this, "关注成功！", Toast.LENGTH_SHORT).show();
                             xqAtttionBtn.setText("已关注");
+                            STATUS="02";
                         } else {
                             Toast.makeText(XQActivity.this, "已取消关注！", Toast.LENGTH_SHORT).show();
                             xqAtttionBtn.setText("关注");
+                            STATUS="01";
                         }
 
                     }
