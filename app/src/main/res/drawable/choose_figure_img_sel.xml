@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true" android:drawable="@drawable/choose_figure_img_selecttrue_shap"/>
+    <item android:state_selected="false" android:drawable="@drawable/choose_figure_img_selectfalse_shap"/>
+
+</selector>

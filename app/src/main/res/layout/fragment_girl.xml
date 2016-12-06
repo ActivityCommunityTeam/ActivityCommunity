@@ -8,70 +8,12 @@
         android:id="@+id/sss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="false">
         <include layout="@layout/toolbar"
                  android:id="@+id/selectRole_girl_toolbar"
             />
     </android.support.design.widget.CoordinatorLayout>
-    <android.support.percent.PercentRelativeLayout
-        android:id="@+id/top"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_below="@+id/sss"
-        app:layout_heightPercent="60%"
-        app:layout_widthPercent="100%"
-        android:background="#F6F1EB"
-        android:orientation="vertical"
-        >
-        <ImageView
-            android:id="@+id/firstRole_img"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_heightPercent="100%"
-            app:layout_widthPercent="50%"
-            android:src="@drawable/girl_04"
-            />
 
-        <RadioGroup
-            android:id="@+id/selectSex_rGroup"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_heightPercent="100%"
-            app:layout_widthPercent="50%"
-            android:layout_below="@+id/selectsex_tv"
-            android:layout_alignParentRight="true"
-            android:orientation="vertical"
-            >
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/colorFont_white"
-                android:layout_margin="10dp"
-                android:text="去个人中心"
-                />
-            <RadioButton
-                android:id="@+id/no_select_girl1_tv"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="人物一"
-                android:button="@null"
-                android:drawableLeft="@drawable/girl_01"
-                />
-            <RadioButton
-                android:id="@+id/no_select_girl2_tv"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_heightPercent="20%"
-                app:layout_widthPercent="50%"
-                android:button="@null"
-                android:background="@drawable/girl_02"
-                />
-
-        </RadioGroup>
-
-
-    </android.support.percent.PercentRelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,6 +57,154 @@
             android:layout_gravity="center"
             />
     </LinearLayout>
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="60%"
+        app:layout_widthPercent="100%"
+        android:background="#F6F1EB"
+        android:orientation="vertical"
+        android:layout_below="@+id/sss"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/firstRole_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="50%"
+            android:src="@drawable/girl_04"
+            />
+
+        <RadioGroup
+            android:layout_margin="@dimen/appbar_padding_top"
+            android:id="@+id/selectSex_rGroup"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="40%"
+            android:layout_below="@+id/selectsex_tv"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/appbar_padding_top"
+            android:paddingRight="@dimen/appbar_padding_top"
+            android:orientation="vertical"
+            android:background="@drawable/choose_figure_radio_shap"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorFont_white"
+                android:layout_margin="10dp"
+                android:text="去个人中心"
+                />
+            <LinearLayout
+                android:paddingLeft="@dimen/appbar_padding_top"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/no_select_girl1_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="人物一"
+                    android:button="@null"
+                    android:background="@drawable/choose_figure_img_sel"
+                    android:src="@drawable/nv1"
+                    android:padding="@dimen/appbar_padding_top"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/mediumsp"
+                    android:text="人物四"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:paddingLeft="@dimen/appbar_padding_top"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/no_select_girl2_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:src="@drawable/nv2"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:background="@drawable/choose_figure_img_sel"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/mediumsp"
+                    android:text="人物一"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </LinearLayout>
+            <LinearLayout
+                android:paddingLeft="@dimen/appbar_padding_top"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/no_select_girl3_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/choose_figure_img_sel"
+                    android:button="@null"
+                    android:src="@drawable/nv3"
+                    android:padding="@dimen/appbar_padding_top"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/mediumsp"
+                    android:text="人物二"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </LinearLayout>
+            <LinearLayout
+                android:paddingLeft="@dimen/appbar_padding_top"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <ImageView
+                    android:id="@+id/no_select_girl4_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:src="@drawable/nv4"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:background="@drawable/choose_figure_img_sel"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/mediumsp"
+                    android:text="人物三"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"/>
+            </LinearLayout>
+
+
+        </RadioGroup>
+
+
+    </android.support.percent.PercentRelativeLayout>
 </android.support.percent.PercentRelativeLayout>
 
 

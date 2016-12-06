@@ -93,7 +93,7 @@
                     android:background="@drawable/tj_recylist_item_money_txt_sel"
                     android:text="￥30"
                     android:gravity="center"
-                    android:textColor="#4FC589"
+                    android:textColor="@color/colorPrimaryDark"
                     />
 
             </LinearLayout>
