@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:background="?android:selectableItemBackground"
+        android:descendantFocusability="blocksDescendants"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,20 +25,21 @@
                 >
 
                 <FrameLayout
-                    android:layout_width="90dp"
+                    android:layout_width="110dp"
+                    android:padding="@dimen/appbar_padding_top"
                     android:layout_height="90dp">
 
                     <ImageView
                         android:id="@+id/activity_pic_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         android:src="@drawable/fj_icon"
                         />
                 </FrameLayout>
 
                 <LinearLayout
-
+                    android:paddingTop="@dimen/appbar_padding_top"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -47,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="中大新校区赏樱花"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/mediumsp"
                         android:textColor="@color/colorFont_blake"
                         />
 
@@ -58,6 +61,7 @@
                         android:drawableLeft="@drawable/point"
                         android:drawablePadding="4dp"
                         android:text="开始时间:2016-10-19"
+                        android:textSize="@dimen/smallsp"
                         />
 
                     <TextView
@@ -67,6 +71,7 @@
                         android:drawableLeft="@drawable/point"
                         android:drawablePadding="4dp"
                         android:text="结束时间："
+                        android:textSize="@dimen/smallsp"
                         />
 
                     <TextView
@@ -76,6 +81,7 @@
                         android:drawableLeft="@drawable/point"
                         android:drawablePadding="4dp"
                         android:text="金额：30元"
+                        android:textSize="@dimen/smallsp"
                         />
                 </LinearLayout>
 

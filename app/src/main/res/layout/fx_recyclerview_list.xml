@@ -10,10 +10,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="?android:selectableItemBackground"
+            android:descendantFocusability="blocksDescendants"
             >
 
             <FrameLayout
-                android:layout_width="90dp"
+                android:padding="@dimen/appbar_padding_top"
+                android:layout_width="110dp"
                 android:layout_height="90dp">
 
                 <ImageView
@@ -26,7 +29,7 @@
             </FrameLayout>
 
             <LinearLayout
-
+                android:paddingTop="@dimen/appbar_padding_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -37,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="中大新校区赏樱花"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/mediumsp"
                     android:textColor="@color/colorFont_blake"
                     />
 
@@ -48,6 +51,7 @@
                     android:drawableLeft="@drawable/point"
                     android:drawablePadding="4dp"
                     android:text="时间:2016-10-19"
+                    android:textSize="@dimen/smallsp"
                     />
 
                 <TextView
@@ -57,14 +61,15 @@
                     android:drawableLeft="@drawable/point"
                     android:drawablePadding="4dp"
                     android:text="地点"
+                    android:textSize="@dimen/smallsp"
                     />
 
                 <!---->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="@dimen/appbar_padding_top"
+                    android:layout_marginTop="2dp"
                     android:orientation="horizontal"
                     >
                     <TextView
@@ -79,8 +84,11 @@
                         android:id="@+id/activity_price_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="0.5"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:background="@drawable/tj_recylist_item_money_txt_sel"
                         android:text="￥30"
+                        android:gravity="center"
                         android:textColor="#4FC589"
                         />
 

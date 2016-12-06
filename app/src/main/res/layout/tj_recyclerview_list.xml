@@ -9,6 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:descendantFocusability="blocksDescendants"
+
         android:orientation="vertical">
         <!---->
         <LinearLayout
@@ -16,22 +19,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-
             <FrameLayout
-                android:layout_width="90dp"
-                android:layout_height="90dp">
+                android:layout_width="110dp"
+                android:layout_height="90dp"
+               android:padding="@dimen/appbar_padding_top">
 
                 <ImageView
                     android:id="@+id/activity_pic_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
                     android:src="@drawable/fj_icon"
                     />
             </FrameLayout>
-
             <LinearLayout
-
+                android:paddingTop="@dimen/appbar_padding_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -40,9 +42,10 @@
                 <TextView
                     android:id="@+id/activity_title_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:text="中大新校区赏樱花"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/mediumsp"
                     android:textColor="@color/colorFont_blake"
                     />
 
@@ -53,6 +56,8 @@
                     android:drawableLeft="@drawable/point"
                     android:drawablePadding="4dp"
                     android:text="时间:2016-10-19"
+                    android:textSize="@dimen/smallsp"
+                    android:paddingTop="2dp"
                     />
 
                 <TextView
@@ -62,33 +67,36 @@
                     android:drawableLeft="@drawable/point"
                     android:drawablePadding="4dp"
                     android:text="地点"
+                    android:textSize="@dimen/smallsp"
+                    android:paddingBottom="2dp"
                     />
 
                 <TextView
                     android:id="@+id/activity_sponsor_tv"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/address"
                     android:drawablePadding="4dp"
+                    android:textSize="@dimen/smallsp"
                     android:text="洛阳禾嘉通信有限公司"
                     />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="#ccc"></View>
+
 
 
             </LinearLayout>
 
-
         </LinearLayout>
         <!---->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="@drawable/tj_recylist_item_line_shap" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             >
 
@@ -98,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="总金额：60"
-
+                android:paddingLeft="@dimen/appbar_padding_top"
                 />
 
             <TextView
@@ -113,9 +121,12 @@
                 android:id="@+id/activity_price_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:text="￥30"
-                android:textColor="#4FC589"
+                android:gravity="center"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/colorPrimaryDark"
+                android:background="@drawable/tj_recylist_item_money_txt_sel"
                 />
 
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.activitycommunity.R;
 import com.example.administrator.activitycommunity.model.Activitys;
@@ -50,6 +51,12 @@ public class FX_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //        myViewHoder.activity_sumPrice_tv.setText("总金额："+_sumPrice);
         myViewHoder.activity_time_tv.setText("时间："+mDatas.get(position).getBegin_time());
         myViewHoder.activity_title_tv.setText(mDatas.get(position).getActivity_title());
+        myViewHoder.activity_price_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"11",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -65,7 +72,7 @@ public class FX_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public interface MyItemClickListener {
-        public void onItemClick(View view,int postion);
+        public void onItemClick(View view, int postion);
     }
 
     static class MyViewHoder extends RecyclerView.ViewHolder implements View.OnClickListener{

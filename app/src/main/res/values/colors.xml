@@ -8,4 +8,8 @@
     <color name="colorFont_white">#fff</color>
     <color name="colorFont_blake">#000</color>
     <color name="selectSexPress">#00000000</color>
+
+    <color name="whitesmoke">#efefef</color> <!-- 烟白色 -->
+
+
 </resources>

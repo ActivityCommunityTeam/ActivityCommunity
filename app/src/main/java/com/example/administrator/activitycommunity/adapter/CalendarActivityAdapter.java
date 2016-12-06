@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.activitycommunity.R;
 import com.example.administrator.activitycommunity.model.Activitys;
@@ -52,7 +53,12 @@ public class CalendarActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
         viewholder.activitySumPriceTv.setText("总金额："+(_activity.getAttended()*_activity.getPrice()));
         viewholder.activityAttendedTv.setText("已报名"+_activity.getAttended());
         viewholder.activityAddressTv.setText("地址："+_activity.getSite());
-
+        viewholder.activityApplyTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"11",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
     /**
@@ -64,7 +70,7 @@ public class CalendarActivityAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public interface MyItemClickListener {
-        public void onItemClick(View view,int postion);
+        public void onItemClick(View view, int postion);
     }
 
     @Override

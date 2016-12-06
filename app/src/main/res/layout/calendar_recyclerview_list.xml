@@ -4,11 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
+    android:descendantFocusability="blocksDescendants"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,20 +27,22 @@
             >
 
             <FrameLayout
-                android:layout_width="90dp"
+                android:layout_width="110dp"
                 android:layout_height="90dp">
 
                 <ImageView
+                    android:padding="@dimen/appbar_padding_top"
                     android:id="@+id/activity_pic_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
                     android:src="@drawable/fj_icon"
                     />
             </FrameLayout>
 
             <LinearLayout
-
+                android:paddingTop="@dimen/appbar_padding_top"
+                android:paddingBottom="@dimen/appbar_padding_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -48,11 +53,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="中大新校区赏樱花"
-                    android:textSize="15sp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/mediumsp"
                     android:textColor="@color/colorFont_blake"
                     />
 
                 <TextView
+                    android:singleLine="true"
                     android:id="@+id/activity_begaintime_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,9 +67,11 @@
                     android:drawablePadding="4dp"
                     android:layout_marginTop="5dp"
                     android:text="开始时间："
+                    android:textSize="@dimen/tinysp"
                     />
 
                 <TextView
+                    android:singleLine="true"
                     android:id="@+id/activity_endtime_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,9 +79,11 @@
                     android:drawablePadding="4dp"
                     android:layout_marginTop="5dp"
                     android:text="结束时间："
+                    android:textSize="@dimen/tinysp"
                     />
 
                 <TextView
+                    android:singleLine="true"
                     android:id="@+id/activity_address_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,6 +91,7 @@
                     android:drawablePadding="4dp"
                     android:layout_marginTop="5dp"
                     android:text="地址："
+                    android:textSize="@dimen/tinysp"
                     />
 
 
@@ -98,10 +110,10 @@
                 />
 
         </LinearLayout>
-        <View
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#ccc"></View>
+            android:layout_height="2dip"
+            android:background="@drawable/tj_recylist_item_line_shap" />
         <!---->
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,8 +129,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="总金额：60"
-                android:gravity="center"
-
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/appbar_padding_top"
                 />
 
             <TextView
@@ -127,17 +139,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="已报名：52"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 />
 
             <TextView
                 android:id="@+id/activity_apply_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:text="报名中"
-                android:background="@drawable/lvkuang"
+                android:background="@drawable/tj_recylist_item_money_txt_sel"
                 android:gravity="center"
-                android:textColor="#4FC589"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginRight="@dimen/appbar_padding_top"
                 />
 
 
