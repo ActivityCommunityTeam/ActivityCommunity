@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.activitycommunity.activity.XQActivity"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/activity_xq_apply_toolBar"
+        layout="@layout/toolbar"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+    <TextView
+        android:id="@+id/tittle_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="黛眉山环山长跑"
+        android:gravity="center"
+        android:textColor="@color/colorFont_blake"
+        android:layout_margin="10dp"
+        />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/md_divider_black"
+            />
+    <TextView
+        android:id="@+id/enrol_time_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="报名时间："
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        />
+        <TextView
+            android:id="@+id/number_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="报名编号："
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            />
+        <TextView
+            android:id="@+id/money_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="支付金额："
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            />
+        <TextView
+            android:id="@+id/status_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="支付状态："
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            />
+        <TextView
+            android:id="@+id/activity_time_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="活动时间："
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            />
+        <TextView
+            android:id="@+id/site_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="详细地址："
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/zhutiao"
+            android:drawablePadding="10dp"
+            android:padding="15dp"
+            android:text="行程安排"
+            android:textColor="@color/colorFont_blake"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/shadow" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            </WebView>
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+
+
+
+
+</LinearLayout>

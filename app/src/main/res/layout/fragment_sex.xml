@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/sss"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
+    <include layout="@layout/toolbar"
+        android:id="@+id/selectRole_toolbar"
+        />
+</android.support.design.widget.CoordinatorLayout>
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/sss"
+        app:layout_heightPercent="60%"
+        app:layout_widthPercent="100%"
+        android:background="#F6F1EB"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/selectsex_tv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="30%"
+            app:layout_widthPercent="100%"
+            android:text="请选择你的身份"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+        <RadioGroup
+            android:id="@+id/selectSex_rGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selectsex_tv"
+            android:orientation="horizontal"
+            >
+        <RadioButton
+            android:id="@+id/no_select_girl_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="女"
+            android:button="@null"
+            android:gravity="center"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/select_sex_girl"
+            android:layout_below="@+id/selectsex_tv"
+            />
+
+            <RadioButton
+                android:id="@+id/no_select_boy_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:button="@null"
+                android:drawableTop="@drawable/select_sex_boy"
+                android:drawablePadding="10dp"
+               />
+
+        </RadioGroup>
+
+
+    </android.support.percent.PercentRelativeLayout>
+
+    <Button
+        android:id="@+id/confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确定"
+        android:layout_below="@+id/top"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorFont_white"
+        />
+</android.support.percent.PercentRelativeLayout>
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.example.administrator.activitycommunity.activity.MainActivity"
+    >
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/index_msg"
+        android:orderInCategory="1"
+        android:title="消息"
+        app:showAsAction="always"/>
+
+
+</menu>

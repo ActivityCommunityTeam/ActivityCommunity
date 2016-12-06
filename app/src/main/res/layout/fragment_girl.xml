@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/sss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+        <include layout="@layout/toolbar"
+                 android:id="@+id/selectRole_girl_toolbar"
+            />
+    </android.support.design.widget.CoordinatorLayout>
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/sss"
+        app:layout_heightPercent="60%"
+        app:layout_widthPercent="100%"
+        android:background="#F6F1EB"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:id="@+id/firstRole_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="50%"
+            android:src="@drawable/girl_04"
+            />
+
+        <RadioGroup
+            android:id="@+id/selectSex_rGroup"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="50%"
+            android:layout_below="@+id/selectsex_tv"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorFont_white"
+                android:layout_margin="10dp"
+                android:text="去个人中心"
+                />
+            <RadioButton
+                android:id="@+id/no_select_girl1_tv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="人物一"
+                android:button="@null"
+                android:drawableLeft="@drawable/girl_01"
+                />
+            <RadioButton
+                android:id="@+id/no_select_girl2_tv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_heightPercent="20%"
+                app:layout_widthPercent="50%"
+                android:button="@null"
+                android:background="@drawable/girl_02"
+                />
+
+        </RadioGroup>
+
+
+    </android.support.percent.PercentRelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/top"
+        android:layout_margin="10dp"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+
+    <EditText
+        android:id="@+id/selectsex_nick_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="昵称："
+        />
+            <EditText
+                android:id="@+id/selectsex_phone_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="手机号码"
+                />
+    <Button
+        android:id="@+id/confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提交信息"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorFont_white"
+        />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/selectsex_index_community"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/index_community"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+</android.support.percent.PercentRelativeLayout>
+
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主题色-->
+    <color name="colorPrimary">#2DAE98</color>
+    <color name="colorPrimaryDark">#2DAE98</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorFont_white">#fff</color>
+    <color name="colorFont_blake">#000</color>
+    <color name="selectSexPress">#00000000</color>
+</resources>
