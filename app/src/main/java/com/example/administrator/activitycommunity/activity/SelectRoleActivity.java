@@ -6,18 +6,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.administrator.activitycommunity.R;
-import com.example.administrator.activitycommunity.fragment.BoyRoleFragment;
-import com.example.administrator.activitycommunity.fragment.GirlRoleFragment;
 import com.example.administrator.activitycommunity.fragment.SelectSexFragment;
 
 public class SelectRoleActivity extends AppCompatActivity {
     private SelectSexFragment mSelectSexFragment;
-    private BoyRoleFragment mBoyRoleFragment;
-    private GirlRoleFragment mGirlRoleFragment;
+
 
     private static final int CONTENT_SEX = 1;
-    private static final int CONTENT_BOY = 2;
-    private static final int CONTENT_GRIL = 3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +35,6 @@ public class SelectRoleActivity extends AppCompatActivity {
 
                 }
                 fragmentCommit(mSelectSexFragment);
-                break;
-            case CONTENT_BOY:
-
-                if (mBoyRoleFragment == null) {
-                    mBoyRoleFragment = new BoyRoleFragment();
-
-                }
-                fragmentCommit(mBoyRoleFragment);
-                break;
-            case CONTENT_GRIL:
-
-                if (mGirlRoleFragment == null) {
-                    mGirlRoleFragment = new GirlRoleFragment();
-
-                }
-                fragmentCommit(mGirlRoleFragment);
                 break;
         }
     }

@@ -17,7 +17,6 @@ public class MY_FragmentPageAdapter extends FragmentStatePagerAdapter {
         super(fm);
         this.fragments = fragments;
     }
-
     @Override
     public Fragment getItem(int position) {
         return fragments.get(position);

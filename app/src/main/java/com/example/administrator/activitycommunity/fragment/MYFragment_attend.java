@@ -100,7 +100,7 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("Daniel","MYFragment_attend---initData---fragments.size()---");
+        Log.i("Daniel","MYFragment_attend---initData---onDestroy---");
         mUnbinder.unbind();
         compositeSubscription.unsubscribe();
     }

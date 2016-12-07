@@ -2,8 +2,6 @@
 
     <!-- Base application theme. -->
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="AppTheme.Base">
-    </style>
 
     <!-- <style name="AppTheme.Base" parent="Theme.AppCompat">
         <item name="windowActionBar">false</item>
@@ -37,6 +35,12 @@
     <!-- 默认的style -->
     <style name="common_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorAccent">@color/colorPrimary</item>
+
     </style>
 
 </resources>

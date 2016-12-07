@@ -1,60 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.percent.PercentRelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/sss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="false">
-        <include layout="@layout/toolbar"
-                 android:id="@+id/selectRole_girl_toolbar"
+
+        <include
+            android:id="@+id/selectRole_girl_toolbar"
+            layout="@layout/toolbar"
             />
     </android.support.design.widget.CoordinatorLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@+id/top"
         android:layout_margin="10dp"
+        android:orientation="horizontal"
         >
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
+            android:orientation="vertical"
             >
 
-    <EditText
-        android:id="@+id/selectsex_nick_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="昵称："
-        />
-            <EditText
-                android:id="@+id/selectsex_phone_et"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="手机号码"
+                >
+
+                <EditText
+                    android:id="@+id/selectsex_nick_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="昵称："
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <EditText
+                    android:id="@+id/selectsex_phone_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="手机号码"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/confirm_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="提交信息"
+                android:textColor="@color/colorFont_white"
                 />
-    <Button
-        android:id="@+id/confirm_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="提交信息"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorFont_white"
-        />
         </LinearLayout>
+
         <ImageView
             android:id="@+id/selectsex_index_community"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/index_community"
             android:layout_gravity="center"
+            android:src="@drawable/index_community"
             />
     </LinearLayout>
 
@@ -62,100 +81,106 @@
         android:id="@+id/top"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_heightPercent="60%"
-        app:layout_widthPercent="100%"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/sss"
         android:background="#F6F1EB"
         android:orientation="vertical"
-        android:layout_below="@+id/sss"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        app:layout_heightPercent="60%"
+        app:layout_widthPercent="100%">
+
         <ImageView
             android:id="@+id/firstRole_img"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="100%"
             app:layout_widthPercent="50%"
-            android:src="@drawable/girl_04"
             />
 
         <RadioGroup
-            android:layout_margin="@dimen/appbar_padding_top"
             android:id="@+id/selectSex_rGroup"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="100%"
-            app:layout_widthPercent="40%"
-            android:layout_below="@+id/selectsex_tv"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/selectsex_tv"
+            android:layout_margin="@dimen/appbar_padding_top"
+            android:background="@drawable/choose_figure_radio_shap"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/appbar_padding_top"
             android:paddingRight="@dimen/appbar_padding_top"
-            android:orientation="vertical"
-            android:background="@drawable/choose_figure_radio_shap"
+            app:layout_heightPercent="100%"
+            app:layout_widthPercent="40%"
             >
+
             <Button
+                android:id="@+id/goMy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/colorFont_white"
                 android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
                 android:text="去个人中心"
+                android:textColor="@color/colorFont_white"
                 />
+
             <LinearLayout
-                android:paddingLeft="@dimen/appbar_padding_top"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/appbar_padding_top">
+
                 <ImageView
                     android:id="@+id/no_select_girl1_tv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="人物一"
-                    android:button="@null"
                     android:background="@drawable/choose_figure_img_sel"
-                    android:src="@drawable/nv1"
+                    android:button="@null"
                     android:padding="@dimen/appbar_padding_top"
+                    android:text="人物一"
                     />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="@dimen/mediumsp"
-                    android:text="人物四"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:text="人物一"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/mediumsp"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:paddingLeft="@dimen/appbar_padding_top"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/appbar_padding_top">
 
                 <ImageView
                     android:id="@+id/no_select_girl2_tv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:button="@null"
-                    android:src="@drawable/nv2"
-                    android:padding="@dimen/appbar_padding_top"
                     android:background="@drawable/choose_figure_img_sel"
+                    android:button="@null"
+                    android:padding="@dimen/appbar_padding_top"
                     />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="@dimen/mediumsp"
-                    android:text="人物一"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:text="人物二"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/mediumsp"/>
             </LinearLayout>
+
             <LinearLayout
-                android:paddingLeft="@dimen/appbar_padding_top"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/appbar_padding_top">
+
                 <ImageView
                     android:id="@+id/no_select_girl3_tv"
                     android:layout_width="0dp"
@@ -163,41 +188,43 @@
                     android:layout_weight="1"
                     android:background="@drawable/choose_figure_img_sel"
                     android:button="@null"
-                    android:src="@drawable/nv3"
                     android:padding="@dimen/appbar_padding_top"
                     />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="@dimen/mediumsp"
-                    android:text="人物二"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:text="人物三"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/mediumsp"/>
             </LinearLayout>
+
             <LinearLayout
-                android:paddingLeft="@dimen/appbar_padding_top"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/appbar_padding_top">
+
                 <ImageView
                     android:id="@+id/no_select_girl4_tv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:button="@null"
-                    android:src="@drawable/nv4"
-                    android:padding="@dimen/appbar_padding_top"
                     android:background="@drawable/choose_figure_img_sel"
+                    android:button="@null"
+                    android:padding="@dimen/appbar_padding_top"
                     />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="@dimen/mediumsp"
-                    android:text="人物三"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:text="人物四"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/mediumsp"/>
             </LinearLayout>
 
 

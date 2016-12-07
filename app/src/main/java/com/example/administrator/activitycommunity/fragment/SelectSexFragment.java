@@ -42,7 +42,7 @@ public class SelectSexFragment extends Fragment {
     private TextView toolbar_title;
     private BoyRoleFragment mBoyRoleFragment;
     private GirlRoleFragment mGirlRoleFragment;
-    private static int CONTENT_SELECT = -1;
+    public static int CONTENT_SELECT = -1;
     private static final int CONTENT_BOY = 2;
     private static final int CONTENT_GRIL = 3;
 
@@ -89,30 +89,18 @@ public class SelectSexFragment extends Fragment {
 
     @OnClick(R.id.confirm_btn)
     public void onClick(View v) {
-        setContent(CONTENT_SELECT);
+        setContent();
 
     }
 
-    private void setContent(int contentSelect) {
-        switch (contentSelect) {
-
-            case CONTENT_BOY:
-
-                if (mBoyRoleFragment == null) {
-                    mBoyRoleFragment = new BoyRoleFragment();
-
-                }
-                fragmentCommit(mBoyRoleFragment);
-                break;
-            case CONTENT_GRIL:
+    private void setContent() {
 
                 if (mGirlRoleFragment == null) {
                     mGirlRoleFragment = new GirlRoleFragment();
 
                 }
                 fragmentCommit(mGirlRoleFragment);
-                break;
-        }
+
     }
 
     private void fragmentCommit(Fragment fragment) {
