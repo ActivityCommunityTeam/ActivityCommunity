@@ -2,7 +2,7 @@ package com.example.administrator.activitycommunity.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Daniel on 2016/11/15.
  */
 
-public class MY_FragmentPageAdapter extends FragmentPagerAdapter {
+public class MY_FragmentPageAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> fragments ;
 
     public MY_FragmentPageAdapter(FragmentManager fm, List<Fragment> fragments) {
@@ -28,6 +28,10 @@ public class MY_FragmentPageAdapter extends FragmentPagerAdapter {
         return fragments==null?0:fragments.size();
     }
 
+    public void update(List<Fragment> fragments){
+        this.fragments = fragments;
+        notifyDataSetChanged();
+    }
     @Override
     public CharSequence getPageTitle(int position) {
         if(position == 0)

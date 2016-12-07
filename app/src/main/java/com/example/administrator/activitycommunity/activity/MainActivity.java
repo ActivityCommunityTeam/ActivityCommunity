@@ -74,21 +74,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case CONTENT_FX:
-
 //                VipMoviesFragment vipMoviesFragment = (VipMoviesFragment) getSupportFragmentManager().findFragmentByTag(VIP_TAG);
                 if (fxFragment == null) {
                     fxFragment = new FXFragment();
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentCommit(null,false);
                     fragmentTransaction.add(R.id.main_frameLayout,fxFragment);
-
                     fragmentTransaction.commit();
                 }else {
                     fragmentCommit(fxFragment,true);
                 }
                 break;
             case CONTENT_MINE:
-
 //                myFragment mineFragment = (myFragment) getSupportFragmentManager().findFragmentByTag(MINE_TAG);
                 if (myFragment == null) {
                     myFragment = new MYFragment();
@@ -96,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                     fragmentCommit(null,false);
                     fragmentTransaction.add(R.id.main_frameLayout,myFragment);
                     fragmentTransaction.commit();
-
                 }else {
                     fragmentCommit(myFragment,true);
                 }

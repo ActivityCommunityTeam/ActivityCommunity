@@ -78,23 +78,35 @@ public class MYFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setFragmentPageAdapter();
+
     }
 
     private void setFragmentPageAdapter() {
         // TODO: 2016/12/6  
         Log.i("Daniel","MYFragment---setFragmentPageAdapter------");
+
             mMYFragment_attend = new MYFragment_attend();
             mMYFragment_attention = new MYFragment_attention();
             fragments = new ArrayList<>();
             fragments.add(mMYFragment_attend);
             fragments.add(mMYFragment_attention);
 
-            Log.i("Daniel","MYFragment---onCreateView---fragments.size()---"+fragments.size());
-            my_fragmentPageAdapter = new MY_FragmentPageAdapter(getActivity().getSupportFragmentManager(),fragments);
-        fragmentMyViewpager.setAdapter(my_fragmentPageAdapter);
-        fragmentMyTablayout.setupWithViewPager(fragmentMyViewpager);
+            Log.i("Daniel", "MYFragment---onCreateView---fragments.size()---" + fragments.size());
+            my_fragmentPageAdapter = new MY_FragmentPageAdapter(this.getChildFragmentManager(), fragments);
+            fragmentMyViewpager.setAdapter(my_fragmentPageAdapter);
 
+        fragmentMyTablayout.setupWithViewPager(fragmentMyViewpager);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden){
+            Log.i("gqf","true");
+        }else{
+            Log.i("gqf","false");
+            setFragmentPageAdapter();
+        }
     }
 
     private void initView() {
@@ -114,10 +126,6 @@ public class MYFragment extends Fragment {
 //        });
         toolbarTitle.setText("个人中心");
     }
-
-
-
-
 
     @OnClick({R.id.user_image, R.id.userName_tv})
     public void onClick(View view) {
@@ -141,6 +149,6 @@ public class MYFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.i("Daniel","MYFragment---onResume---");
-
+        setFragmentPageAdapter();
     }
 }

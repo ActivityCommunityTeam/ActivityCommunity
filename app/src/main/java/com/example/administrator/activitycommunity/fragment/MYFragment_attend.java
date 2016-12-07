@@ -130,7 +130,15 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
         initData();
         Log.i("Daniel","MYFragment_attend---onStart---");
     }
-
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden){
+            Log.i("gqf1","true");
+        }else{
+            Log.i("gqf1","false");
+        }
+    }
     @Override
     public void onPause() {
         super.onPause();
