@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,14 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
         recyclerviewFragmentAttend.setNestedScrollingEnabled(false);
         //设置recyclerview
         recyclerviewFragmentAttend.setLayoutManager(new LinearLayoutManager(mContext));
+        Log.i("Daniel","MYFragment_attend---onCreateView------");
+
+
+        return view;
+    }
+
+    private void initData() {
+        Log.i("Daniel","MYFragment_attend---initData---fragments.size()---");
         mSubscription= NetWork.getApiService().getPersonalActivitys(01,7)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -79,11 +88,6 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
                     }
                 });
         compositeSubscription.add(mSubscription);
-
-
-
-
-        return view;
     }
 
     private void setAdapter() {
@@ -96,6 +100,7 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.i("Daniel","MYFragment_attend---initData---fragments.size()---");
         mUnbinder.unbind();
         compositeSubscription.unsubscribe();
     }
@@ -103,12 +108,37 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
     @Override
     public void onItemClick(View view, int postion) {
         PersonalActivitys _personalActicity = mDatas.get(postion);
-
         Intent intent = new Intent(mContext, XQ_ApplyActivity.class);
         Bundle _bundle = new Bundle();
         _bundle.putSerializable("_personalActicity",_personalActicity);
         intent.putExtras(_bundle);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+        Log.i("Daniel","MYFragment_attend---onResume---");
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i("Daniel","MYFragment_attend---onStart---");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i("Daniel","MYFragment_attend---onPause---");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("Daniel","MYFragment_attend---onStop---");
     }
 }

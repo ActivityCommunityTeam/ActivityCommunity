@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,8 @@ public class MYFragment extends Fragment {
     private Unbinder mUnbinder;
     private MYFragment_attend mMYFragment_attend;
     private MYFragment_attention mMYFragment_attention;
+    private MY_FragmentPageAdapter my_fragmentPageAdapter;
+    private List<Fragment> fragments;
 
     @Nullable
     @Override
@@ -62,20 +65,30 @@ public class MYFragment extends Fragment {
         initView();
         realm = Realm.getDefaultInstance();
         mUser = realm.where(User.class).findAll();
+        Log.i("Daniel","MYFragment---onCreateView-----");
+        setFragmentPageAdapter();
 //        if (!mUser.get(0).getNickname().equals("")){
 //
 //            userNameTv.setText( mUser.get(0).getNickname());
 //        }
-        List<Fragment> fragments = new ArrayList<>();
-        mMYFragment_attend = new MYFragment_attend();
-        mMYFragment_attention = new MYFragment_attention();
-        fragments.add(mMYFragment_attend);
-        fragments.add(mMYFragment_attention);
-        MY_FragmentPageAdapter my_fragmentPageAdapter = new MY_FragmentPageAdapter(getActivity().getSupportFragmentManager(),fragments);
-        fragmentMyViewpager.setAdapter(my_fragmentPageAdapter);
-        fragmentMyTablayout.setupWithViewPager(fragmentMyViewpager);
 
         return view;
+    }
+
+    private void setFragmentPageAdapter() {
+        // TODO: 2016/12/6  
+        Log.i("Daniel","MYFragment---setFragmentPageAdapter------");
+            mMYFragment_attend = new MYFragment_attend();
+            mMYFragment_attention = new MYFragment_attention();
+            fragments = new ArrayList<>();
+            fragments.add(mMYFragment_attend);
+            fragments.add(mMYFragment_attention);
+        if (my_fragmentPageAdapter==null) {
+            Log.i("Daniel","MYFragment---onCreateView---fragments.size()---"+fragments.size());
+            my_fragmentPageAdapter = new MY_FragmentPageAdapter(getActivity().getSupportFragmentManager(),fragments);
+        }
+        fragmentMyViewpager.setAdapter(my_fragmentPageAdapter);
+        fragmentMyTablayout.setupWithViewPager(fragmentMyViewpager);
     }
 
     private void initView() {
@@ -116,5 +129,12 @@ public class MYFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("Daniel","MYFragment---onResume---");
+
     }
 }

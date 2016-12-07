@@ -65,6 +65,7 @@ public class FXFragment extends Fragment implements FX_Adapter.MyItemClickListen
         recyclerviewFragmentFx.setLayoutManager(new LinearLayoutManager(mContext));
         initView(view);
         getActivityDatas();
+        Log.i("Daniel", "FXFragment---onCreateView------");
 
 
         return view;
