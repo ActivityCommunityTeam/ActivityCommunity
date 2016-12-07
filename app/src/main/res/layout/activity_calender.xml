@@ -31,17 +31,6 @@
                 android:background="#d8d8d8" />
             <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/calendarViewTop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:mcv_showOtherDates="all"
-                app:mcv_selectionColor="@color/colorPrimary"
-                app:mcv_calendarMode="month"
-                app:mcv_arrowColor="@color/colorPrimary"
-                android:visibility="gone"
-                />
-            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/calendarViewDown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

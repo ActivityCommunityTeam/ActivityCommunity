@@ -18,9 +18,11 @@ import com.example.administrator.activitycommunity.R;
 import com.example.administrator.activitycommunity.adapter.CalendarActivityAdapter;
 import com.example.administrator.activitycommunity.model.Activitys;
 import com.example.administrator.activitycommunity.net.NetWork;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -38,8 +40,7 @@ public class CalenderActivity extends AppCompatActivity implements CalendarActiv
 
     @BindView(R.id.recyclerview_calendarActivity)
     RecyclerView recyclerviewCalendarActivity;
-    @BindView(R.id.calendarViewTop)
-    MaterialCalendarView calendarViewTop;
+
     @BindView(R.id.calendarViewDown)
     MaterialCalendarView calendarViewDown;
     @BindView(R.id.toolbar_title)
@@ -74,6 +75,11 @@ public class CalenderActivity extends AppCompatActivity implements CalendarActiv
         compositeSubscription = new CompositeSubscription();
         initView();
         initDate();
+
+
+        calendarViewDown.setCurrentDate(new Date());
+        calendarViewDown.setDateSelected(new Date(),true);
+
 
 
     }
@@ -165,13 +171,15 @@ public class CalenderActivity extends AppCompatActivity implements CalendarActiv
     @OnClick({R.id.calendar_img,R.id.calendar_linearlayout})
     public void onClick() {
         if (isClick) {
-            calendarViewTop.setVisibility(View.GONE);
-            calendarViewDown.setVisibility(View.VISIBLE);
+            /*calendarViewTop.setVisibility(View.GONE);
+            calendarViewDown.setVisibility(View.VISIBLE);*/
+            calendarViewDown.state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit();
             calendarImg.setImageDrawable(getResources().getDrawable(R.drawable.calendar_down));
             isClick = false;
         } else {
-            calendarViewTop.setVisibility(View.VISIBLE);
-            calendarViewDown.setVisibility(View.GONE);
+            /*calendarViewTop.setVisibility(View.VISIBLE);
+            calendarViewDown.setVisibility(View.GONE);*/
+            calendarViewDown.state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit();
             calendarImg.setImageDrawable(getResources().getDrawable(R.drawable.calendar_top));
             isClick = true;
         }

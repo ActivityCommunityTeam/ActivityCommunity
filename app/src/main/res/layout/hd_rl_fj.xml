@@ -3,14 +3,13 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="horizontal"
-              android:layout_marginTop="15dp"
-              android:layout_marginBottom="5dp"
+
 
     >
     <TextView
         android:id="@+id/activitys_hdrlfj"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:drawableTop="@drawable/hd_icon"
         android:background="?android:selectableItemBackground"
         android:clickable="true"
@@ -18,11 +17,13 @@
         android:text="活动"
         android:gravity="center"
         android:layout_weight="1"
+        android:paddingTop="15dp"
+        android:paddingBottom="5dp"
         />
     <TextView
         android:id="@+id/calendar_hdrlfj"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:drawableTop="@drawable/rl_icon"
         android:background="?android:selectableItemBackground"
         android:clickable="true"
@@ -30,11 +31,13 @@
         android:text="日历"
         android:gravity="center"
         android:layout_weight="1"
+        android:paddingTop="15dp"
+        android:paddingBottom="5dp"
         />
     <TextView
         android:id="@+id/nearby_hdrlfj"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:drawableTop="@drawable/fj_icon"
         android:background="?android:selectableItemBackground"
         android:clickable="true"
@@ -42,6 +45,8 @@
         android:text="附近"
         android:gravity="center"
         android:layout_weight="1"
+        android:paddingTop="15dp"
+        android:paddingBottom="5dp"
         />
 
 </LinearLayout>
