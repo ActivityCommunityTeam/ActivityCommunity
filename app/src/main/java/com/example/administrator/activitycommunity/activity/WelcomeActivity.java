@@ -2,6 +2,7 @@ package com.example.administrator.activitycommunity.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -148,6 +149,16 @@ public class WelcomeActivity extends AppCompatActivity {
                         realm.beginTransaction();
                         User _realmUser=realm.copyToRealmOrUpdate(userResultData.getUser());
                         realm.commitTransaction();
+                        SharedPreferences read =getSharedPreferences("user", MODE_WORLD_READABLE);
+                        int _userId = read.getInt("userId",-1);
+                        if (_userId==-1){
+                            Log.i("Daniel","WelcomeActivity---onNext---realmUser.getUser_id()---"+_realmUser.getUser_id());
+                            Log.i("Daniel","WelcomeActivity---onNext---realmUser.getUser_id()---"+_realmUser.getUser_no());
+                            SharedPreferences.Editor editor = getSharedPreferences("user", MODE_WORLD_WRITEABLE).edit();
+                            editor.putInt("userId",_realmUser.getUser_id());
+                            editor.putString("userNo",_realmUser.getUser_no());
+                            editor.commit();
+                        }
 //                        Toast.makeText(WelcomeActivity.this, "userId"+_realmUser.getUser_id(), Toast.LENGTH_SHORT).show();
                         countToEnter();
 

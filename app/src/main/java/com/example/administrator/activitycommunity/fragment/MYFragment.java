@@ -28,7 +28,6 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 import static com.example.administrator.activitycommunity.R.id.toolbar_title;
 
@@ -50,7 +49,7 @@ public class MYFragment extends Fragment {
     @BindView(R.id.fragment_my_viewpager)
     ViewPager fragmentMyViewpager;
     private Realm realm;
-    private RealmResults<User> mUser;
+    private User mUser;
     private Unbinder mUnbinder;
     private MYFragment_attend mMYFragment_attend;
     private MYFragment_attention mMYFragment_attention;
@@ -62,10 +61,13 @@ public class MYFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my, container, false);
         mUnbinder=ButterKnife.bind(this, view);
-        initView();
         realm = Realm.getDefaultInstance();
-        mUser = realm.where(User.class).findAll();
+        realm.beginTransaction();
+        mUser = realm.where(User.class).findFirst();
+        realm.commitTransaction();
         Log.i("Daniel","MYFragment---onCreateView-----");
+
+        initView();
 
 //        if (!mUser.get(0).getNickname().equals("")){
 //
@@ -111,6 +113,15 @@ public class MYFragment extends Fragment {
 
     private void initView() {
         setToolbar();
+        Log.i("Daniel","MYFragment---initView---mUser--"+mUser);
+        Log.i("Daniel","MYFragment---initView---mUser.getNickname()---"+mUser.getNickname());
+        String _nick = mUser.getNickname();
+        if (_nick!=null){
+        if (!_nick.equals("")){
+            userNameTv.setText(mUser.getNickname());
+        }
+        }
+
     }
     private void setToolbar() {
         //让原始的toolbar的title不显示

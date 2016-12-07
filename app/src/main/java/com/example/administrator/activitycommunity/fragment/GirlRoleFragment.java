@@ -1,12 +1,14 @@
 package com.example.administrator.activitycommunity.fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+
+import static android.content.Context.MODE_WORLD_READABLE;
 
 /**
  * Created by Administrator on 2016/11/10.
@@ -66,7 +70,7 @@ public class GirlRoleFragment extends Fragment {
         ButterKnife.bind(this, view);
         initView(view);
         selectRole_flag = SelectSexFragment.CONTENT_SELECT;
-        Log.i("Daniel","GirlRoleFragment---onCreateView---selectRole_flag---"+selectRole_flag);
+
         if(selectRole_flag!=-1){
 
             if (selectRole_flag==2){
@@ -126,19 +130,50 @@ public class GirlRoleFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
     }
+    /**
+     * 验证手机格式
+     */
+    public static boolean IsMobileNO(String mobiles) {
+        /**
+         移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
+         联通：130、131、132、152、155、156、185、186
+         电信：133、153、180、189、（1349卫通）
+         总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
+         */
+        String telRegex = "[1][358]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        if (TextUtils.isEmpty(mobiles)) return false;
+        else return mobiles.matches(telRegex);
+    }
 
     @OnClick({R.id.confirm_btn, R.id.selectsex_index_community,R.id.firstRole_img, R.id.goMy, R.id.no_select_girl1_tv, R.id.no_select_girl2_tv, R.id.no_select_girl3_tv, R.id.no_select_girl4_tv})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.confirm_btn:
-                realm.beginTransaction();
-                User user = new User();
-                user.setNickname(selectsexNickEt.getText().toString());
-                user.setPhone_num(selectsexPhoneEt.getText().toString());
-                User realmUser = realm.copyToRealmOrUpdate(user);
-                realm.commitTransaction();
-                Toast.makeText(getActivity(), "信息提交成功！", Toast.LENGTH_SHORT).show();
-
+                SharedPreferences read = getActivity().getSharedPreferences("user", MODE_WORLD_READABLE);
+                int _userId = read.getInt("userId",-1);
+                String _userNo = read.getString("userNo","");
+                Log.i("Daniel","GirlRoleFragment---onClick---_userId---"+_userId);
+                Log.i("Daniel","GirlRoleFragment---onClick---_userNo---"+_userNo);
+                String _nick = selectsexNickEt.getText().toString().trim();
+                String _phone = selectsexPhoneEt.getText().toString().trim();
+                boolean isMobileNo=IsMobileNO(_phone);
+                if (!_nick.isEmpty()&&!_phone.isEmpty()){
+                    if (isMobileNo){
+                        realm.beginTransaction();
+                        User user = new User();
+                        user.setUser_id(_userId);
+                        user.setUser_no(_userNo);
+                        user.setNickname(_nick);
+                        user.setPhone_num(_phone);
+                        User realmUser = realm.copyToRealmOrUpdate(user);
+                        realm.commitTransaction();
+                        Toast.makeText(getActivity(), "信息提交成功！", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getActivity(), "手机格式不正确！", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(getActivity(), "昵称或手机号不能为空！", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.selectsex_index_community:
 
