@@ -225,6 +225,7 @@ public class XQActivity extends AppCompatActivity {
 
     private void show_Dialog(ActivityDetail activityDetail) {
         ApplyDialogFragment applyDialogFragment = new ApplyDialogFragment(activityDetail);
+
         applyDialogFragment.show(getFragmentManager(),"applyDialogFragment");
 //        View view = LayoutInflater.from(this).inflate(R.layout.zhifu, null);
 //        // 设置style 控制默认dialog带来的边距问题

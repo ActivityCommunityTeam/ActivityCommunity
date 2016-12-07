@@ -10,9 +10,27 @@
     <!--sp-->
     <dimen name="tinysp">10sp</dimen>
     <dimen name="smallsp">12sp</dimen>
-
-
     <dimen name="mediumsp">15sp</dimen>
     <dimen name="bigsp">20sp</dimen>
     <dimen name="hugesp">25sp</dimen>
+
+    <!--mdp-->
+    <dimen name="tinymdp">5dp</dimen>
+    <dimen name="smallmdp">10dp</dimen>
+    <dimen name="mediummdp">15dp</dimen>
+    <dimen name="bigmdp">20dp</dimen>
+    <dimen name="hugemdp">25dp</dimen>
+
+    <!--hdp-->
+    <dimen name="tinyhdp">30sp</dimen>
+    <dimen name="smallhdp">40sp</dimen>
+    <dimen name="mediumhdp">50sp</dimen>
+    <dimen name="bighdp">60sp</dimen>
+    <dimen name="hugehdp">70sp</dimen>
+    <dimen name="hugehxxdp">80sp</dimen>
+    <dimen name="hugehxxxdp">90sp</dimen>
+    <dimen name="hugehxxxxdp">100sp</dimen>
+
+
+
 </resources>

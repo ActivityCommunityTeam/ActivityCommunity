@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -47,6 +48,9 @@ public class ApplyDialogFragment extends DialogFragment implements View.OnClickL
         titleTv.setText(activityDetail.getActivity_title());
         xqApplyBtn.setOnClickListener(this);
         xqCancelBtn.setOnClickListener(this);
+
+        this.getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         return view;
     }
 

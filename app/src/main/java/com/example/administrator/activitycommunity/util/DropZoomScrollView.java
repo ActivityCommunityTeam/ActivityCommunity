@@ -24,6 +24,9 @@ public class DropZoomScrollView extends ScrollView implements View.OnTouchListen
     private int dropZoomViewWidth;
     private int dropZoomViewHeight;
 
+    int height;
+
+
     public DropZoomScrollView(Context context) {
         super(context);
     }
@@ -45,7 +48,7 @@ public class DropZoomScrollView extends ScrollView implements View.OnTouchListen
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
+        height=heightMeasureSpec;
     }
 
     private void init() {
@@ -117,8 +120,11 @@ public class DropZoomScrollView extends ScrollView implements View.OnTouchListen
             return;
         }
         ViewGroup.LayoutParams lp = dropZoomView.getLayoutParams();
+
         lp.width = (int) (dropZoomViewWidth + s);
         lp.height = (int) (dropZoomViewHeight * ((dropZoomViewWidth + s) / dropZoomViewWidth));
+
         dropZoomView.setLayoutParams(lp);
+
     }
 }
