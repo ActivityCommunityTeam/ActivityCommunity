@@ -104,11 +104,7 @@ public class TJFragment extends Fragment implements BaseSliderView.OnSliderClick
         getActivityDatas();
         rl_tv.setOnClickListener(this);
 
-
-
-
         return view;
-
     }
 
     @Override
@@ -145,7 +141,6 @@ public class TJFragment extends Fragment implements BaseSliderView.OnSliderClick
                         mActivityses=activityses;
                         setAdapter(mContext, activityses);
 
-
                     }
                 });
         compositeSubscription.add(mSubscription);
@@ -171,7 +166,6 @@ public class TJFragment extends Fragment implements BaseSliderView.OnSliderClick
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle().putString("url", m.getImage_url() == null ? "no" : m.getImage_url());
             textSliderView.getBundle().putString("name", m.getActivity_title());
-
             mSliderLayout.addSlider(textSliderView);
         }
     }

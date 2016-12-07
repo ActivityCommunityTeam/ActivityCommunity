@@ -119,7 +119,7 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
     @Override
     public void onResume() {
         super.onResume();
-        initData();
+
         Log.i("Daniel","MYFragment_attend---onResume---");
 
     }
@@ -127,6 +127,7 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
     @Override
     public void onStart() {
         super.onStart();
+        initData();
         Log.i("Daniel","MYFragment_attend---onStart---");
     }
 

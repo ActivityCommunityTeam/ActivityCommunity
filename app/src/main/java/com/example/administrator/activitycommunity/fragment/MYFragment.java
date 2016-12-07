@@ -66,13 +66,19 @@ public class MYFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         mUser = realm.where(User.class).findAll();
         Log.i("Daniel","MYFragment---onCreateView-----");
-        setFragmentPageAdapter();
+
 //        if (!mUser.get(0).getNickname().equals("")){
 //
 //            userNameTv.setText( mUser.get(0).getNickname());
 //        }
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setFragmentPageAdapter();
     }
 
     private void setFragmentPageAdapter() {
@@ -83,12 +89,12 @@ public class MYFragment extends Fragment {
             fragments = new ArrayList<>();
             fragments.add(mMYFragment_attend);
             fragments.add(mMYFragment_attention);
-        if (my_fragmentPageAdapter==null) {
+
             Log.i("Daniel","MYFragment---onCreateView---fragments.size()---"+fragments.size());
             my_fragmentPageAdapter = new MY_FragmentPageAdapter(getActivity().getSupportFragmentManager(),fragments);
-        }
         fragmentMyViewpager.setAdapter(my_fragmentPageAdapter);
         fragmentMyTablayout.setupWithViewPager(fragmentMyViewpager);
+
     }
 
     private void initView() {
