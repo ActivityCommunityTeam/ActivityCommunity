@@ -287,10 +287,11 @@ public class XQActivity extends AppCompatActivity {
         Elements elements=doc.getElementsByTag("img");
         for (Element element : elements) {
             element.attr("width","100%").attr("height","auto");
-            element.attr("src","http://211.149.235.17:8080"+element.attr("src"));
+            if(!element.attr("src").contains("http://")){
+                element.attr("src","http://211.149.235.17:8080"+element.attr("src"));
+            }
             Log.i("gqf",element.toString());
         }
-
         Log.d("VACK", doc.toString());
         return doc.toString();
     }
