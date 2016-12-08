@@ -3,6 +3,8 @@ package com.example.administrator.activitycommunity.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,6 +36,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,6 +100,9 @@ public class XQActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_xq);
         mUnbinder = ButterKnife.bind(this);
+
+
+
         compositeSubscription = new CompositeSubscription();
         realm = Realm.getDefaultInstance();
         realm.beginTransaction();
@@ -174,8 +184,23 @@ public class XQActivity extends AppCompatActivity {
         webView.getSettings().setDisplayZoomControls(false);
         webView.addJavascriptInterface(new InJavaScriptLocalObj(), "java_obj");
         webView.setWebViewClient(new CustomWebViewClient());
+        Thread t=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HtmlStr = testGetHtml(MAINURL + mActivityDetail.getActivity_id());
+                    Log.i("gqfaaa",HtmlStr);
+                    Message m=new Message();
+                    m.what=1;
+                    handler.sendMessage(m);
+                }catch (Exception e){
 
-        webView.loadUrl(MAINURL+mActivityDetail.getActivity_id());
+                }
+            }
+        });
+       t.start();
+
+        //webView.loadUrl(MAINURL+mActivityDetail.getActivity_id());
 //        webView.getSettings().setUseWideViewPort(true);
 //        webView.getSettings().setLoadWithOverviewMode(true);
 
@@ -185,6 +210,17 @@ public class XQActivity extends AppCompatActivity {
 
 
     }
+    Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            //要做的事情
+            super.handleMessage(msg);
+            if(msg.what==1){
+                if(HtmlStr!=null&&!HtmlStr.equals("")){
+                    webView.loadDataWithBaseURL(null,getNewContent(HtmlStr), "text/html", "utf-8", null);
+                }
+            }
+        }
+    };
     final class CustomWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -215,8 +251,8 @@ public class XQActivity extends AppCompatActivity {
         public void getSource(String html) {
             Log.d("html=", html);
             HtmlStr=html;
-            webView.clearFormData();
-            webView.loadDataWithBaseURL(null,getNewContent(HtmlStr), "text/html", "utf-8", null);
+            //webView.clearFormData();
+            //webView.loadDataWithBaseURL(null,getNewContent(HtmlStr), "text/html", "utf-8", null);
 
         }
     }
@@ -424,5 +460,33 @@ public class XQActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+    public static byte[] readStream(InputStream inputStream) throws Exception {
+        byte[] buffer = new byte[1024];
+        int len = -1;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteArrayOutputStream.write(buffer, 0, len);
+        }
+
+        inputStream.close();
+        byteArrayOutputStream.close();
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    public static String testGetHtml(String urlpath) throws Exception {
+        URL url = new URL(urlpath);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(6 * 1000);
+        conn.setRequestMethod("GET");
+
+        if (conn.getResponseCode() == 200) {
+            InputStream inputStream = conn.getInputStream();
+            byte[] data = readStream(inputStream);
+            String html = new String(data);
+            return html;
+        }
+        return null;
     }
 }
