@@ -39,6 +39,7 @@
             android:layout_gravity="center_horizontal"
             />
     </LinearLayout>
+
     <include layout="@layout/fragment_content_my"/>
 
 </LinearLayout>

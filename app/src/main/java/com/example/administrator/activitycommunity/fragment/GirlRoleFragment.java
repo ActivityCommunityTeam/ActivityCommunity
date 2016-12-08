@@ -87,6 +87,14 @@ public class GirlRoleFragment extends Fragment {
         return view;
     }
 
+    private void changeImgBG(ImageView img){
+        noSelectGirl1Tv.setBackgroundResource(R.drawable.choose_figure_img_selectfalse_shap);
+        noSelectGirl2Tv.setBackgroundResource(R.drawable.choose_figure_img_selectfalse_shap);
+        noSelectGirl3Tv.setBackgroundResource(R.drawable.choose_figure_img_selectfalse_shap);
+        noSelectGirl4Tv.setBackgroundResource(R.drawable.choose_figure_img_selectfalse_shap);
+        img.setBackgroundResource(R.drawable.choose_figure_img_selecttrue_shap);
+    }
+
     private void setGirlImage() {
         firstRoleImg.setImageResource(R.drawable.girl_01);
         noSelectGirl1Tv.setImageResource(R.drawable.nv_01);
@@ -190,7 +198,7 @@ public class GirlRoleFragment extends Fragment {
                 }else {
                     firstRoleImg.setImageResource(R.drawable.girl_01);
                 }
-
+                changeImgBG(noSelectGirl1Tv);
                 break;
             case R.id.no_select_girl2_tv:
                 if (selectRole_flag==2){
@@ -198,7 +206,7 @@ public class GirlRoleFragment extends Fragment {
                 }else {
                     firstRoleImg.setImageResource(R.drawable.girl_02);
                 }
-
+                changeImgBG(noSelectGirl2Tv);
                 break;
             case R.id.no_select_girl3_tv:
                 if (selectRole_flag==2){
@@ -206,7 +214,7 @@ public class GirlRoleFragment extends Fragment {
                 }else {
                     firstRoleImg.setImageResource(R.drawable.girl_03);
                 }
-
+                changeImgBG(noSelectGirl3Tv);
                 break;
             case R.id.no_select_girl4_tv:
                 if (selectRole_flag==2){
@@ -214,7 +222,7 @@ public class GirlRoleFragment extends Fragment {
                 }else {
                     firstRoleImg.setImageResource(R.drawable.girl_04);
                 }
-
+                changeImgBG(noSelectGirl4Tv);
                 break;
         }
     }
