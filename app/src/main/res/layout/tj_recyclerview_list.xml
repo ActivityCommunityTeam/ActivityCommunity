@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     android:layout_margin="4dp"
     >
 
@@ -37,6 +38,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:src="@drawable/fj_icon"
+                    android:background="@drawable/list_img_layer"
                     />
             </FrameLayout>
             <LinearLayout
@@ -97,7 +99,13 @@
             </LinearLayout>
 
         </LinearLayout>
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:layout_marginLeft="@dimen/appbar_padding_top"
+    android:layout_marginRight="@dimen/appbar_padding_top"
+    android:layout_marginBottom="@dimen/tinymdp"
+    android:background="@drawable/tj_recylist_item_line_shap"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,7 +143,6 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:background="@drawable/tj_recylist_item_money_txt_sel"
                 />
-
 
         </LinearLayout>
     </LinearLayout>

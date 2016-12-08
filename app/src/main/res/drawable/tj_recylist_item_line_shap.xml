@@ -5,8 +5,11 @@
     <stroke
         android:dashGap="3dp"
         android:dashWidth="3dp"
+
         android:width="1dp"
         android:color="@color/whitesmoke" />
+
+
     <!-- 虚线的高度 -->
-    <size android:height="1dp" />
+    <size android:height="2dp" />
 </shape>

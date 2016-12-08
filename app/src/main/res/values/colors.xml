@@ -10,6 +10,7 @@
     <color name="selectSexPress">#00000000</color>
 
     <color name="whitesmoke">#efefef</color> <!-- 烟白色 -->
+    <color name="darkwhitesmoke">#dcdcdc</color> <!-- 深烟白色 -->
     <color name="colorAttention">#FF5500</color> <!-- 关注 -->
     <color name="lucency">#00000000</color><!-- 透明 -->
 
