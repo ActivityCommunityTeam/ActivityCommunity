@@ -36,6 +36,7 @@
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         android:src="@drawable/fj_icon"
+                        android:background="@drawable/list_img_layer"
                         />
                 </FrameLayout>
 

@@ -142,7 +142,7 @@ public class MYFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.user_image:
-//                startActivity(new Intent(getActivity(), SelectRoleActivity.class));
+                startActivity(new Intent(getActivity(), SelectRoleActivity.class));
                 break;
             case R.id.userName_tv:
                 startActivity(new Intent(getActivity(), SelectRoleActivity.class));
