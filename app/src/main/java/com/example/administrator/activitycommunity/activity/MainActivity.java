@@ -1,15 +1,19 @@
 package com.example.administrator.activitycommunity.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.administrator.activitycommunity.R;
 import com.example.administrator.activitycommunity.fragment.FXFragment;
 import com.example.administrator.activitycommunity.fragment.MYFragment;
 import com.example.administrator.activitycommunity.fragment.TJFragment;
+import com.example.administrator.activitycommunity.util.SystemBarTintManager;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -57,8 +61,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
+    public void changeSystemBarColor(int id) {
+        // 改变状�?�栏颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(true);
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintResource(id);// 通知栏所�?颜色
+        }
+    }
+    private void setTranslucentStatus(boolean on) {
+        Window win =this.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
     private void setContent(int contentHome) {
         switch (contentHome) {
             case CONTENT_TJ:

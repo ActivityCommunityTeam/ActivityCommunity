@@ -1,13 +1,19 @@
 package com.example.administrator.activitycommunity.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +29,11 @@ import com.example.administrator.activitycommunity.model.SaveOrder;
 import com.example.administrator.activitycommunity.model.User;
 import com.example.administrator.activitycommunity.net.NetWork;
 import com.squareup.picasso.Picasso;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,7 +86,7 @@ public class XQActivity extends AppCompatActivity {
     private static String STATUS = "";
     private static int CODE = -1;
     private static String LZBZ = "";
-    private static String URL="http://211.149.235.17:8080/hdsq/app/getDetailContent/";
+    private static String MAINURL="http://211.149.235.17:8080/hdsq/app/getDetailContent/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +103,7 @@ public class XQActivity extends AppCompatActivity {
 
 
     }
+
 
     private void getAttentionStatus(int activityId) {
         NetWork.getApiService().getAttentionStatus(mUser.getUser_id(),activityId)
@@ -135,21 +147,96 @@ public class XQActivity extends AppCompatActivity {
         activityDetailPriceTv.setText(mActivityDetail.getPrice() + "元/人");
         activityDetailTimeTv.setText(mActivityDetail.getEnd_time());
         Picasso.with(this).load(mActivityDetail.getImage_url()).into(activityDetailImageUrlBottomImg);
-        webView.loadUrl(URL+mActivityDetail.getActivity_id());
+
+        WebSettings settings = webView.getSettings();
+        settings.setAppCacheEnabled(true);
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        //setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setTextZoom(100);
+        settings.setUseWideViewPort(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setSupportZoom(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.setInitialScale(57);
+        webView.getSettings().setBlockNetworkImage(false);
+
+
+
+        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
         webView.setVerticalScrollBarEnabled(false);
         webView.setHorizontalScrollBarEnabled(false);
         webView.getSettings().setBuiltInZoomControls(true);// 设置缩放
         webView.getSettings().setDisplayZoomControls(false);
+        webView.addJavascriptInterface(new InJavaScriptLocalObj(), "java_obj");
+        webView.setWebViewClient(new CustomWebViewClient());
+
+        webView.loadUrl(MAINURL+mActivityDetail.getActivity_id());
 //        webView.getSettings().setUseWideViewPort(true);
 //        webView.getSettings().setLoadWithOverviewMode(true);
-    }
 
+
+
+
+
+
+    }
+    final class CustomWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+        }
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            view.loadUrl("javascript:window.java_obj.getSource('<head>'+" +
+                    "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+            super.onPageFinished(view, url);
+
+
+        }
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+        }
+
+    }
+    String HtmlStr="";
+    final class InJavaScriptLocalObj {
+        @JavascriptInterface
+        public void getSource(String html) {
+            Log.d("html=", html);
+            HtmlStr=html;
+            webView.clearFormData();
+            webView.loadDataWithBaseURL(null,getNewContent(HtmlStr), "text/html", "utf-8", null);
+
+        }
+    }
+    private String getNewContent(String htmltext){
+        Log.i("gqfhtml",htmltext);
+        Document doc=Jsoup.parse(htmltext);
+        Elements elements=doc.getElementsByTag("img");
+        for (Element element : elements) {
+            element.attr("width","100%").attr("height","auto");
+            element.attr("src","http://211.149.235.17:8080"+element.attr("src"));
+            Log.i("gqf",element.toString());
+        }
+
+        Log.d("VACK", doc.toString());
+        return doc.toString();
+    }
     private void initData() {
         Intent intent = getIntent();
         int _activityId = intent.getIntExtra("activityId", -1);
         mMax_num_people = intent.getIntExtra("Max_num_people", -1);
-//        Log.i("Daniel", "XQActivity---initData---_activityId---" + _activityId);
-//        Log.i("Daniel", "XQActivity---initData---mMax_num_people---" + mMax_num_people);
         if (_activityId != -1) {
             mSubscription = NetWork.getApiService().getActivityDetail(_activityId)
                     .subscribeOn(Schedulers.io())

@@ -4,6 +4,7 @@ import com.example.administrator.activitycommunity.model.ActivityDetail;
 import com.example.administrator.activitycommunity.model.Activitys;
 import com.example.administrator.activitycommunity.model.AttentionStatus;
 import com.example.administrator.activitycommunity.model.Carousel;
+import com.example.administrator.activitycommunity.model.HtmlStr;
 import com.example.administrator.activitycommunity.model.Login;
 import com.example.administrator.activitycommunity.model.Payment;
 import com.example.administrator.activitycommunity.model.PersonalActivitys;
@@ -30,6 +31,10 @@ public interface ApiService {
 
     @GET("getAttentionStatus/{user_id}-{activity_id}")
     Observable<AttentionStatus> getAttentionStatus(@Path("user_id")int user_id,@Path("activity_id")int activity_id);
+
+    @GET("getDetailContent/{activity_id}")
+    Observable<HtmlStr> getDetailContent(@Path("activity_id")int activity_id);
+
     /**
      * 获取个人参与的活动
      * @param lzbz
