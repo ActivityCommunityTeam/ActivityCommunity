@@ -121,7 +121,7 @@ public class FXFragment extends Fragment implements FX_Adapter.MyItemClickListen
 
     private void setAdapter(Context mContext, List<Activitys> activityses) {
         if (fx_Adapter == null) {
-            fx_Adapter = new FX_Adapter(mContext, activityses);
+            fx_Adapter = new FX_Adapter(mContext, activityses,getActivity().getFragmentManager());
         }
         recyclerviewFragmentFx.setAdapter(fx_Adapter);
         fx_Adapter.setOnItemClickListener(this);

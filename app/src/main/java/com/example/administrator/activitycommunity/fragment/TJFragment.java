@@ -1,5 +1,6 @@
 package com.example.administrator.activitycommunity.fragment;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -148,7 +149,8 @@ public class TJFragment extends Fragment implements BaseSliderView.OnSliderClick
 
     private void setAdapter(Context mContext, List<Activitys> activityses) {
         if (tj_Adapter == null) {
-            tj_Adapter = new TJ_Adapter(mContext, activityses);
+            FragmentManager f=getActivity().getFragmentManager();
+            tj_Adapter = new TJ_Adapter(mContext, activityses,f);
         }
         recyclerviewFragmentTj.setAdapter(tj_Adapter);
         tj_Adapter.setOnItemClickListener(this);

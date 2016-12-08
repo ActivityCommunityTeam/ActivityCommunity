@@ -50,7 +50,6 @@
 
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="黛眉山环山长跑"
                 android:textColor="@color/colorFont_blake"
                 android:layout_weight="1"
                 android:id="@+id/activityDetail_title_tv"/>
@@ -59,8 +58,8 @@
                     android:id="@+id/activityDetail_data_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2016-10-20"
                     android:gravity="center"
+                    android:text="日期"
                     android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/activitydetail_data"
                     />
@@ -78,7 +77,6 @@
                             android:id="@+id/activityDetail_money_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="总金额：50"
                             android:layout_weight="1"
                             android:gravity="end"
                             />
@@ -87,7 +85,6 @@
                             android:id="@+id/activityDetail_attended_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="已报名：35"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             />
@@ -95,7 +92,6 @@
                             android:id="@+id/activityDetail_residue_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="剩余名额：5"
                             android:layout_weight="1"
                             />
                     </LinearLayout>
@@ -109,9 +105,9 @@
                     android:id="@+id/activityDetail_address_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="河南省洛阳市新安县石井镇"
                     android:drawableLeft="@drawable/activitydetail_address"
                     android:drawablePadding="10dp"
+                    android:text="地点"
                     android:paddingTop="5dp"
                     android:paddingLeft="10dp"
 
@@ -120,19 +116,19 @@
                     android:id="@+id/activityDetail_price_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="120元/人"
                     android:drawableLeft="@drawable/activitydetail_money"
                     android:drawablePadding="10dp"
+                    android:text="价格"
                     android:padding="10dp"
                     />
                 <TextView
                     android:id="@+id/activityDetail_time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10-22 08:30-17:00"
                     android:drawableLeft="@drawable/activitydetail_time"
                     android:drawablePadding="10dp"
                     android:paddingLeft="10dp"
+                    android:text="时间"
                     />
                  <TextView
                      android:layout_width="wrap_content"
@@ -180,9 +176,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="报名"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="报名"
             android:textColor="#23CD77"
             android:background="@drawable/tj_recylist_item_money_txt_sel"
             />
@@ -193,9 +189,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="关注"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="关注"
                 android:textColor="#FF5500"
                 android:background="@drawable/tj_recylist_item_attention_txt_sel"
                 />

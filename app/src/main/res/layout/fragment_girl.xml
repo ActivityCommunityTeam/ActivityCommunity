@@ -132,8 +132,9 @@
 
                 <ImageView
                     android:id="@+id/no_select_girl1_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:background="@drawable/choose_figure_img_sel"
                     android:button="@null"
                     android:scaleType="fitCenter"

@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:background="?android:selectableItemBackground"
         android:descendantFocusability="blocksDescendants"
-
         android:orientation="vertical">
         <!---->
         <!---->
@@ -37,7 +36,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/fj_icon"
                     android:background="@drawable/list_img_layer"
                     />
             </FrameLayout>
@@ -54,7 +52,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="中大新校区赏樱花"
                     android:textSize="@dimen/mediumsp"
                     android:textColor="@color/colorFont_blake"
                     />
@@ -65,7 +62,6 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/point"
                     android:drawablePadding="4dp"
-                    android:text="时间:2016-10-19"
                     android:textSize="@dimen/smallsp"
                     android:paddingTop="2dp"
                     />
@@ -76,7 +72,6 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/point"
                     android:drawablePadding="4dp"
-                    android:text="地点"
                     android:textSize="@dimen/smallsp"
                     android:paddingBottom="2dp"
                     />
@@ -90,7 +85,6 @@
                     android:drawablePadding="4dp"
                     android:textSize="@dimen/smallsp"
                     android:textColor="@color/orange"
-                    android:text="洛阳禾嘉通信有限公司"
                     />
 
 
@@ -118,7 +112,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="总金额：60"
                 android:paddingLeft="@dimen/appbar_padding_top"
                 android:textSize="@dimen/mediumsp"
                 />
@@ -128,7 +121,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="已报名：52"
                 android:textSize="@dimen/mediumsp"
                 />
 
@@ -137,7 +129,6 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/md_button_padding_horizontal_internalexternal"
                 android:layout_weight="1"
-                android:text="￥30"
                 android:gravity="center"
                 android:layout_marginRight="@dimen/appbar_padding_top"
                 android:textColor="@color/colorPrimaryDark"

@@ -25,6 +25,7 @@ import com.example.administrator.activitycommunity.R;
 import com.example.administrator.activitycommunity.fragment.ApplyDialogFragment;
 import com.example.administrator.activitycommunity.model.ActivityDetail;
 import com.example.administrator.activitycommunity.model.AttentionStatus;
+import com.example.administrator.activitycommunity.model.HtmlStr;
 import com.example.administrator.activitycommunity.model.Payment;
 import com.example.administrator.activitycommunity.model.SaveOrUpdateAtten;
 import com.example.administrator.activitycommunity.model.SaveOrder;
@@ -109,9 +110,33 @@ public class XQActivity extends AppCompatActivity {
         mUser = realm.where(User.class).findFirst();
         realm.commitTransaction();
         initData();
+        initHtml();
         initView();
 
 
+    }
+
+    private void initHtml() {
+        NetWork.getApiService().getDetailContent(7)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HtmlStr>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("Daniel","-----web请求失败------");
+                    }
+
+                    @Override
+                    public void onNext(HtmlStr htmlStr) {
+                        Log.i("Daniel","-----------"+htmlStr.toString());
+
+                    }
+                });
     }
 
 
@@ -347,26 +372,13 @@ public class XQActivity extends AppCompatActivity {
     }
 
     private void show_Dialog(ActivityDetail activityDetail) {
-        ApplyDialogFragment applyDialogFragment = new ApplyDialogFragment(activityDetail);
 
+        ApplyDialogFragment applyDialogFragment = new ApplyDialogFragment();
+        applyDialogFragment.setmPrice(activityDetail.getPrice());
+        applyDialogFragment.setmTime(activityDetail.getBegin_time());
+        applyDialogFragment.setmTitle(activityDetail.getActivity_title());
         applyDialogFragment.show(getFragmentManager(),"applyDialogFragment");
-//        View view = LayoutInflater.from(this).inflate(R.layout.zhifu, null);
-//        // 设置style 控制默认dialog带来的边距问题
-//        final Dialog dialog = new Dialog(this, R.style.common_dialog);
-//        dialog.setContentView(view);
-//        dialog.show();
-//        Window window = dialog.getWindow();
-//        window.getDecorView().setPadding(0, 0, 0, 0);
-//        WindowManager.LayoutParams params = window.getAttributes();
-//        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        params.height=WindowManager.LayoutParams.WRAP_CONTENT;
-//        params.gravity = Gravity.CENTER;
-//        window.setAttributes(params);
-
-//        new MaterialDialog.Builder(this)
-//                .customView(R.layout.zhifu,true)
-//                .
-//                .show();
+//
     }
 
     private int getSaveOrderNetWork() {
