@@ -13,7 +13,9 @@
     <FrameLayout
         android:id="@+id/main_frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="57dp"
+        >
     </FrameLayout>
 
     <com.roughike.bottombar.BottomBar
@@ -23,6 +25,7 @@
         android:layout_gravity="bottom"
         app:bb_tabXmlResource="@xml/bottombar_tabs"
         android:background="@color/colorFont_white"
-        app:bb_behavior="shifting|shy"
+        app:bb_behavior="shifting"
+
         />
 </android.support.design.widget.CoordinatorLayout>

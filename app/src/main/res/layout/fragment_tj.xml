@@ -26,7 +26,10 @@
             android:id="@+id/slider"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            app:pager_animation="Stack"
+            app:indicator_visibility="invisible"
             app:auto_cycle="false"/>
+
 
         <include android:id="@+id/hdrlfj" layout="@layout/hd_rl_fj"/>
 
@@ -52,7 +55,6 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_fragment_tj"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>

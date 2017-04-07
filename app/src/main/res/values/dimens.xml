@@ -6,7 +6,6 @@
     <dimen name="appbar_padding_top">8dp</dimen>
 
 
-
     <!--sp-->
     <dimen name="tinysp">10sp</dimen>
     <dimen name="smallsp">12sp</dimen>
@@ -30,7 +29,6 @@
     <dimen name="hugehxxdp">80sp</dimen>
     <dimen name="hugehxxxdp">90sp</dimen>
     <dimen name="hugehxxxxdp">100sp</dimen>
-
 
 
 </resources>

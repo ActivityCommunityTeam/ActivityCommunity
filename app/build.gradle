@@ -70,9 +70,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.nineoldandroids:library:2.4.0'
     testCompile 'junit:junit:4.12'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.8.0@aar'
     compile 'com.afollestad.material-dialogs:core:0.9.0.2'
     compile 'com.prolificinteractive:material-calendarview:1.4.2'

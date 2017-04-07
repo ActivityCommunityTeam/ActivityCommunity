@@ -2,11 +2,13 @@ package com.example.administrator.activitycommunity.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
+import static android.content.Context.MODE_WORLD_READABLE;
+
 /**
  * Created by Administrator on 2016/11/10.
  */
@@ -44,6 +48,7 @@ public class MYFragment_attention extends Fragment implements MY_FragmentAttenti
     private CompositeSubscription compositeSubscription;
     private List<PersonalActivitys> mDatas;
     private Context mContext;
+    private static int ATTENTION=02;
 
 
     @Nullable
@@ -57,7 +62,18 @@ public class MYFragment_attention extends Fragment implements MY_FragmentAttenti
         recyclerviewFragmentAttention.setNestedScrollingEnabled(false);
         //设置recyclerview
         recyclerviewFragmentAttention.setLayoutManager(new LinearLayoutManager(mContext));
-        mSubscription = NetWork.getApiService().getPersonalActivitys(02, 7)
+        initDate();
+
+
+
+        return view;
+    }
+
+    private void initDate() {
+        SharedPreferences read = getActivity().getSharedPreferences("user", MODE_WORLD_READABLE);
+        int _userId = read.getInt("userId",-1);
+        Log.i("Daniel","MYFragment_attend---initData---userId---"+_userId);
+        mSubscription = NetWork.getApiService().getPersonalActivitys(ATTENTION, _userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<PersonalActivitys>>() {
@@ -80,9 +96,6 @@ public class MYFragment_attention extends Fragment implements MY_FragmentAttenti
                     }
                 });
         compositeSubscription.add(mSubscription);
-
-
-        return view;
     }
 
     private void setAdapter() {

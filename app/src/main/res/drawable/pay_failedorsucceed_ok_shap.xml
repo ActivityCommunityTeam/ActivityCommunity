@@ -12,6 +12,6 @@
 
     <!-- 填充 -->
     <solid
-        android:color="@color/colorPrimary"/><!-- 填充的颜色 -->
+        android:color="@color/colorButton"/><!-- 填充的颜色 -->
 
 </shape>

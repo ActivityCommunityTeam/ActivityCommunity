@@ -96,7 +96,7 @@ public class GirlRoleFragment extends Fragment {
     }
 
     private void setGirlImage() {
-        firstRoleImg.setImageResource(R.drawable.girl_01);
+        firstRoleImg.setImageResource(R.drawable.girl_03);
         noSelectGirl1Tv.setImageResource(R.drawable.nv_01);
         noSelectGirl2Tv.setImageResource(R.drawable.nv_02);
         noSelectGirl3Tv.setImageResource(R.drawable.nv_03);
@@ -104,7 +104,7 @@ public class GirlRoleFragment extends Fragment {
     }
 
     private void setBoyImage() {
-        firstRoleImg.setImageResource(R.drawable.boy_01);
+        firstRoleImg.setImageResource(R.drawable.boy_04);
         noSelectGirl1Tv.setImageResource(R.drawable.nan_01);
         noSelectGirl2Tv.setImageResource(R.drawable.nan_02);
         noSelectGirl3Tv.setImageResource(R.drawable.nan_03);

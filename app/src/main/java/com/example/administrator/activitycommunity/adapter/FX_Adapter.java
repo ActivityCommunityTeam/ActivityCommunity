@@ -60,6 +60,7 @@ public class FX_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onClick(View v) {
                 ApplyDialogFragment applyDialogFragment = new ApplyDialogFragment();
+                applyDialogFragment.setActivityId(_activity.getActivity_id());
                 applyDialogFragment.setmPrice(_activity.getPrice());
                 applyDialogFragment.setmTime(_activity.getBegin_time());
                 applyDialogFragment.setmTitle(_activity.getActivity_title());

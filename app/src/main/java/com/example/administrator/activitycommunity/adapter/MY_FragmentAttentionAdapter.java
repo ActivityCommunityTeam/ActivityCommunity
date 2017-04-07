@@ -2,6 +2,7 @@ package com.example.administrator.activitycommunity.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class MY_FragmentAttentionAdapter extends RecyclerView.Adapter<RecyclerVi
     public MY_FragmentAttentionAdapter(Context mContext, List<PersonalActivitys> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
+        Log.i("Daniel","MY_FragmentAttentionAdapter---MY_FragmentAttentionAdapter---mDatas.size()---"+mDatas.size());
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 

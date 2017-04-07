@@ -44,14 +44,13 @@ import rx.subscriptions.CompositeSubscription;
 import static com.example.administrator.activitycommunity.net.NetWork.getApiService;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private static final int TIMETOCOUNT = 0;
-    private static Unbinder mUnbinder;
     @BindView(R.id.startPage_img)
     ImageView startPageImg;
     @BindView(R.id.activity_time_tv)
     TextView activityTimeTv;
-
     private CompositeSubscription mCompositeSubscription;
+    private static final int TIMETOCOUNT = 3;
+    private static Unbinder mUnbinder;
     //    private MyCountDownTimer mc;
     private String IMEI;
     private Realm realm;
@@ -188,7 +187,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 .subscribe(new Observer<Long>() {
                     @Override
                     public void onCompleted() {
-                        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                        startActivity(new Intent(WelcomeActivity.this, SelectRoleActivity.class));
                         WelcomeActivity.this.finish();
                     }
 

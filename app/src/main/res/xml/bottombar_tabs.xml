@@ -3,20 +3,20 @@
     <tab
         id="@+id/tab_tj"
         icon="@drawable/tj_dark"
-        inActiveColor="#1F7162"
-        activeColor="#2DAE98"
+        inActiveColor="#2DAE98"
+        activeColor="#1F7162"
         title="推荐" />
     <tab
         id="@+id/tab_fx"
         icon="@drawable/fx_dark"
-        activeColor="#2DAE98"
-        inActiveColor="#1F7162"
+        activeColor="#1F7162"
+        inActiveColor="#2DAE98"
         title="发现" />
 
     <tab
         id="@+id/tab_my"
         icon="@drawable/my_dark"
-        activeColor="#2DAE98"
-        inActiveColor="#1F7162"
+        activeColor="#1F7162"
+        inActiveColor="#2DAE98"
         title="我的"/>
 </tabs>

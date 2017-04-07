@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--主题色-->
-    <color name="colorPrimary">#23CC77</color>
+    <color name="colorButton">#23CC77</color>
+    <color name="colorPrimary">#2DAE98</color>
     <color name="colorPrimaryDark">#2DAE98</color>
     <color name="colorAccent">#FF4081</color>
 

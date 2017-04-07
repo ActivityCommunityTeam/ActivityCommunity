@@ -2,16 +2,30 @@ package com.example.administrator.activitycommunity.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.example.administrator.activitycommunity.R;
 import com.example.administrator.activitycommunity.model.ActivityDetail;
 import com.example.administrator.activitycommunity.model.PersonalActivitys;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +56,7 @@ public class XQ_ApplyActivity extends AppCompatActivity {
     private ActivityDetail mActivityDetail;
     private CompositeSubscription compositeSubscription;
     private static String URL="http://211.149.235.17:8080/hdsq/app/getDetailContent/";
+    private static String MAINURL="http://211.149.235.17:8080/hdsq/app/getDetailContent/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,33 +73,7 @@ public class XQ_ApplyActivity extends AppCompatActivity {
         PersonalActivitys _personalActicity= (PersonalActivitys) intent.getSerializableExtra("_personalActicity");
         setData(_personalActicity);
         int _activityId = intent.getIntExtra("activityId", -1);
-//        Log.i("Daniel", "XQActivity---initData---_activityId---" + _activityId);
-//        Log.i("Daniel", "XQActivity---initData---mMax_num_people---" + mMax_num_people);
-//        if (_activityId != -1) {
-//            mSubscription = NetWork.getApiService().getActivityDetail(_activityId)
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(new Observer<ActivityDetail>() {
-//                        @Override
-//                        public void onCompleted() {
-//
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            Log.i("Daniel", "XQActivity---onError---获取详情失败！---");
-//                        }
-//
-//                        @Override
-//                        public void onNext(ActivityDetail activityDetail) {
-//                            mActivityDetail = activityDetail;
-//                            Log.i("Daniel", "XQActivity---onError---mActivityDetail---"+mActivityDetail.getActivity_title());
-//                            setData();
-//                        }
-//                    });
-//            compositeSubscription.add(mSubscription);
-//
-//        }
+
     }
 
     private void setData(PersonalActivitys personalActicity) {
@@ -95,7 +84,7 @@ public class XQ_ApplyActivity extends AppCompatActivity {
         siteTv.setText("详细地址："+personalActicity.getSite());
         statusTv.setText("支付状态："+personalActicity.getPay_status());
         numberTv.setText("报名编号："+personalActicity.getOrder_no());
-        webView.loadUrl(URL+personalActicity.getActivity_id());
+        setWeb();
 
 
     }
@@ -119,5 +108,106 @@ public class XQ_ApplyActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+    private void setWeb() {
+        WebSettings settings = webView.getSettings();
+        settings.setAppCacheEnabled(true);
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        //setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setTextZoom(100);
+        settings.setUseWideViewPort(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setSupportZoom(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.setInitialScale(57);
+        webView.getSettings().setBlockNetworkImage(false);
+
+
+
+        webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        webView.setVerticalScrollBarEnabled(false);
+        webView.setHorizontalScrollBarEnabled(false);
+
+        webView.getSettings().setBuiltInZoomControls(true);// 设置缩放
+        webView.getSettings().setDisplayZoomControls(false);
+        /*webView.addJavascriptInterface(new InJavaScriptLocalObj(), "java_obj");
+        webView.setWebViewClient(new CustomWebViewClient());*/
+        Thread t=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    HtmlStr = testGetHtml(MAINURL + mActivityDetail.getActivity_id());
+                    Log.i("gqfaaa",HtmlStr);
+                    Message m=new Message();
+                    m.what=1;
+                    handler.sendMessage(m);
+                }catch (Exception e){
+
+                }
+            }
+        });
+        t.start();
+    }
+
+    String HtmlStr="";
+    Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            //要做的事情
+            super.handleMessage(msg);
+            if(msg.what==1){
+                if(HtmlStr!=null&&!HtmlStr.equals("")){
+                    webView.loadDataWithBaseURL(null,getNewContent(HtmlStr), "text/html", "utf-8", null);
+                }
+            }
+        }
+    };
+
+    private String getNewContent(String htmltext){
+        Log.i("gqfhtml",htmltext);
+        Document doc= Jsoup.parse(htmltext);
+        Elements elements=doc.getElementsByTag("img");
+        for (Element element : elements) {
+            element.attr("width","100%").attr("height","auto");
+            if(!element.attr("src").contains("http://")){
+                element.attr("src","http://211.149.235.17:8080"+element.attr("src"));
+            }
+            Log.i("gqf",element.toString());
+        }
+        Log.d("VACK", doc.toString());
+        return doc.toString();
+    }
+
+    public static byte[] readStream(InputStream inputStream) throws Exception {
+        byte[] buffer = new byte[1024];
+        int len = -1;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteArrayOutputStream.write(buffer, 0, len);
+        }
+
+        inputStream.close();
+        byteArrayOutputStream.close();
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    public static String testGetHtml(String urlpath) throws Exception {
+        java.net.URL url = new URL(urlpath);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(6 * 1000);
+        conn.setRequestMethod("GET");
+
+        if (conn.getResponseCode() == 200) {
+            InputStream inputStream = conn.getInputStream();
+            byte[] data = readStream(inputStream);
+            String html = new String(data);
+            return html;
+        }
+        return null;
     }
 }

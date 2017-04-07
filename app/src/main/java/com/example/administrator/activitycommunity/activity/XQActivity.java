@@ -1,7 +1,6 @@
 package com.example.administrator.activitycommunity.activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,12 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,10 +20,7 @@ import com.example.administrator.activitycommunity.R;
 import com.example.administrator.activitycommunity.fragment.ApplyDialogFragment;
 import com.example.administrator.activitycommunity.model.ActivityDetail;
 import com.example.administrator.activitycommunity.model.AttentionStatus;
-import com.example.administrator.activitycommunity.model.HtmlStr;
-import com.example.administrator.activitycommunity.model.Payment;
 import com.example.administrator.activitycommunity.model.SaveOrUpdateAtten;
-import com.example.administrator.activitycommunity.model.SaveOrder;
 import com.example.administrator.activitycommunity.model.User;
 import com.example.administrator.activitycommunity.net.NetWork;
 import com.squareup.picasso.Picasso;
@@ -53,6 +45,8 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
+
+import static com.example.administrator.activitycommunity.net.NetWork.getApiService;
 
 public class XQActivity extends AppCompatActivity {
 
@@ -110,38 +104,13 @@ public class XQActivity extends AppCompatActivity {
         mUser = realm.where(User.class).findFirst();
         realm.commitTransaction();
         initData();
-        initHtml();
         initView();
 
 
     }
 
-    private void initHtml() {
-        NetWork.getApiService().getDetailContent(7)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<HtmlStr>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i("Daniel","-----web请求失败------");
-                    }
-
-                    @Override
-                    public void onNext(HtmlStr htmlStr) {
-                        Log.i("Daniel","-----------"+htmlStr.toString());
-
-                    }
-                });
-    }
-
-
     private void getAttentionStatus(int activityId) {
-        NetWork.getApiService().getAttentionStatus(mUser.getUser_id(),activityId)
+        Subscription getAttentionStatus_Subscription=NetWork.getApiService().getAttentionStatus(mUser.getUser_id(),activityId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<AttentionStatus>() {
@@ -167,6 +136,7 @@ public class XQActivity extends AppCompatActivity {
 
                     }
                 });
+        compositeSubscription.add(getAttentionStatus_Subscription);
 
     }
 
@@ -182,7 +152,11 @@ public class XQActivity extends AppCompatActivity {
         activityDetailPriceTv.setText(mActivityDetail.getPrice() + "元/人");
         activityDetailTimeTv.setText(mActivityDetail.getEnd_time());
         Picasso.with(this).load(mActivityDetail.getImage_url()).into(activityDetailImageUrlBottomImg);
+        setWeb();
 
+    }
+
+    private void setWeb() {
         WebSettings settings = webView.getSettings();
         settings.setAppCacheEnabled(true);
         settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
@@ -205,10 +179,11 @@ public class XQActivity extends AppCompatActivity {
         webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
         webView.setVerticalScrollBarEnabled(false);
         webView.setHorizontalScrollBarEnabled(false);
+
         webView.getSettings().setBuiltInZoomControls(true);// 设置缩放
         webView.getSettings().setDisplayZoomControls(false);
-        webView.addJavascriptInterface(new InJavaScriptLocalObj(), "java_obj");
-        webView.setWebViewClient(new CustomWebViewClient());
+        /*webView.addJavascriptInterface(new InJavaScriptLocalObj(), "java_obj");
+        webView.setWebViewClient(new CustomWebViewClient());*/
         Thread t=new Thread(new Runnable() {
             @Override
             public void run() {
@@ -223,18 +198,10 @@ public class XQActivity extends AppCompatActivity {
                 }
             }
         });
-       t.start();
-
-        //webView.loadUrl(MAINURL+mActivityDetail.getActivity_id());
-//        webView.getSettings().setUseWideViewPort(true);
-//        webView.getSettings().setLoadWithOverviewMode(true);
-
-
-
-
-
-
+        t.start();
     }
+
+    String HtmlStr="";
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             //要做的事情
@@ -246,41 +213,7 @@ public class XQActivity extends AppCompatActivity {
             }
         }
     };
-    final class CustomWebViewClient extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
-        }
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            view.loadUrl("javascript:window.java_obj.getSource('<head>'+" +
-                    "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
-            super.onPageFinished(view, url);
 
-
-        }
-        @Override
-        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-            super.onReceivedError(view, request, error);
-        }
-
-    }
-    String HtmlStr="";
-    final class InJavaScriptLocalObj {
-        @JavascriptInterface
-        public void getSource(String html) {
-            Log.d("html=", html);
-            HtmlStr=html;
-            //webView.clearFormData();
-            //webView.loadDataWithBaseURL(null,getNewContent(HtmlStr), "text/html", "utf-8", null);
-
-        }
-    }
     private String getNewContent(String htmltext){
         Log.i("gqfhtml",htmltext);
         Document doc=Jsoup.parse(htmltext);
@@ -300,7 +233,7 @@ public class XQActivity extends AppCompatActivity {
         int _activityId = intent.getIntExtra("activityId", -1);
         mMax_num_people = intent.getIntExtra("Max_num_people", -1);
         if (_activityId != -1) {
-            mSubscription = NetWork.getApiService().getActivityDetail(_activityId)
+            mSubscription = getApiService().getActivityDetail(_activityId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<ActivityDetail>() {
@@ -375,6 +308,7 @@ public class XQActivity extends AppCompatActivity {
     private void show_Dialog(ActivityDetail activityDetail) {
 
         ApplyDialogFragment applyDialogFragment = new ApplyDialogFragment();
+        applyDialogFragment.setActivityId(activityDetail.getActivity_id());
         applyDialogFragment.setmPrice(activityDetail.getPrice());
         applyDialogFragment.setmTime(activityDetail.getBegin_time());
         applyDialogFragment.setmTitle(activityDetail.getActivity_title());
@@ -382,67 +316,13 @@ public class XQActivity extends AppCompatActivity {
 //
     }
 
-    private int getSaveOrderNetWork() {
-        final int[] _Order_id = {-1};
-        // TODO: 2016/12/2  
-        NetWork.getApiService().saveOrder(7, 6, "1503")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<SaveOrder>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i("Daniel", "XQActivity---onError---保存订单失败！---");
-
-                    }
-
-                    @Override
-                    public void onNext(SaveOrder saveOrder) {
-                        Log.i("Daniel", "XQActivity---onNext---保存订单成功！---");
-                        Log.i("Daniel", "XQActivity---onNext---saveOrder.getCode()---" + saveOrder.getCode());
-                        Log.i("Daniel", "XQActivity---onNext---saveOrder.getOrder_id()---" + saveOrder.getOrder_id());
-                        Log.i("Daniel", "XQActivity---onNext---saveOrder.getOrder_no()---" + saveOrder.getOrder_no());
-                        _Order_id[0] = saveOrder.getOrder_id();
-                    }
-                });
-        return _Order_id[0];
-
-    }
-
-    private void getPaymentNetwork(int Order_id) {
-
-        NetWork.getApiService().payment(Order_id, "01", "01", "1502")
-                .observeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Payment>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i("Daniel", "XQActivity---支付失败！---");
 
 
-                    }
 
-                    @Override
-                    public void onNext(Payment payment) {
-                        Toast.makeText(XQActivity.this, "" + payment.getCode(), Toast.LENGTH_SHORT).show();
-                        Log.i("Daniel", "XQActivity---payment.getCode()---" + payment.getCode());
-
-                    }
-                });
-    }
 
     private void getAttentionNetWork() {
 
-        NetWork.getApiService().SaveOrUpdateAtten(mUser.getUser_id(), mActivityDetail.getActivity_id(), STATUS)
+        Subscription getAttentionNetWork_Subscription= getApiService().SaveOrUpdateAtten(mUser.getUser_id(), mActivityDetail.getActivity_id(), STATUS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SaveOrUpdateAtten>() {
@@ -473,6 +353,7 @@ public class XQActivity extends AppCompatActivity {
 
                     }
                 });
+        compositeSubscription.add(getAttentionNetWork_Subscription);
     }
     public static byte[] readStream(InputStream inputStream) throws Exception {
         byte[] buffer = new byte[1024];

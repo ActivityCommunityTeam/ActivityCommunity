@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.utils.StringUtils;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.example.administrator.activitycommunity.R;
 import com.example.administrator.activitycommunity.activity.CalenderActivity;
 import com.example.administrator.activitycommunity.activity.XQActivity;
@@ -97,11 +97,8 @@ public class TJFragment extends Fragment implements BaseSliderView.OnSliderClick
         recyclerviewFragmentTj.setNestedScrollingEnabled(false);
         //设置recyclerview
         recyclerviewFragmentTj.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Log.i("Daniel", "--------------> initView(view)");
         initView(view);
-        Log.i("Daniel", "--------------> getCarousel();");
         getCarousel();
-        Log.i("Daniel", "-------------->  getActivityDatas();");
         getActivityDatas();
         rl_tv.setOnClickListener(this);
 
@@ -162,12 +159,13 @@ public class TJFragment extends Fragment implements BaseSliderView.OnSliderClick
             mSliderLayout.startAutoCycle();
         }
         for (Carousel m : carousels) {
-            TextSliderView textSliderView = new TextSliderView(getActivity());
+
+            DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
             if (!StringUtils.isEmpty(m.getImage_url()))
-                textSliderView.description(m.getActivity_title()).image(m.getImage_url()).setScaleType(BaseSliderView.ScaleType.CenterCrop).setOnSliderClickListener(this);
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle().putString("url", m.getImage_url() == null ? "no" : m.getImage_url());
-            textSliderView.getBundle().putString("name", m.getActivity_title());
+                textSliderView.image(m.getImage_url())
+                        .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                        .setOnSliderClickListener(this);
+
             mSliderLayout.addSlider(textSliderView);
         }
     }
@@ -220,7 +218,10 @@ public class TJFragment extends Fragment implements BaseSliderView.OnSliderClick
      * 获取轮播图片
      */
     public void getCarousel() {
-        mSubscription = NetWork.getApiService().getCarousel().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Carousel>>() {
+        mSubscription = NetWork.getApiService().getCarousel()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Carousel>>() {
             @Override
             public void onCompleted() {
 

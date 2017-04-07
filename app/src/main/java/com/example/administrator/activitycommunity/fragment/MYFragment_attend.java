@@ -2,6 +2,7 @@ package com.example.administrator.activitycommunity.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,6 +31,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
+import static android.content.Context.MODE_WORLD_READABLE;
+
 /**
  * Created by Administrator on 2016/11/10.
  */
@@ -44,6 +47,7 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
     private CompositeSubscription compositeSubscription;
     private List<PersonalActivitys> mDatas;
     private Context mContext;
+    private static int ATTENT=01;//01：参加的活动
 
 
     @Nullable
@@ -64,8 +68,11 @@ public class MYFragment_attend extends Fragment implements MY_FragmentAttendAdap
     }
 
     private void initData() {
-        Log.i("Daniel","MYFragment_attend---initData---fragments.size()---");
-        mSubscription= NetWork.getApiService().getPersonalActivitys(01,7)
+        SharedPreferences read = getActivity().getSharedPreferences("user", MODE_WORLD_READABLE);
+        int _userId = read.getInt("userId",-1);
+        Log.i("Daniel","MYFragment_attend---initData---userId---"+_userId);
+
+        mSubscription= NetWork.getApiService().getPersonalActivitys(ATTENT,_userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<PersonalActivitys>>() {
